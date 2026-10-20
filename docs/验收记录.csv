@@ -1,12 +1,12 @@
 编号,轨道,阶段,项目,状态,证据路径或URL,说明
-C01,共同,环境,云主机与Docker,PASS,/root/241880199/draft,Ubuntu 22.04.5 LTS x86_64; Docker 29.1.3 client/server
+C01,共同,环境,云主机与Docker,PASS,/root/241880199/draft,Ubuntu 22.04.5 LTS x86_64; Docker 29.1.3 client/server; E5/E6 均在该云主机执行
 C02,共同,E5,真实复现与差异,PASS,work/e5-01/summary.json; docs/实验报告.md,初始构建 make not found; 候选构建 exit 0; 同一镜像输出 hello E3
-C03,共同,E6,输入哈希报告日志,PENDING,,E6 未开始
+C03,共同,E6,输入哈希报告日志,PASS,work/e6-own/evidence/result.json; work/e6-own/verify-evidence.json,trace_id e6-b-0ddad5da…; 两轮构建; 候选 d91d585e…; 同镜像禁网运行
 C04,共同,E7,自主扩展测试,PASS,services/draft/tests/test_autobuild.py,新增 digest-pinned baseline 回归测试；build-03 25 passed
 C05,共同,CI,正常失败恢复及artifact,PENDING,https://github.com/241880199/DevOps_Draft/actions/runs/39416968387,正常 run PASS；失败/恢复 PR 与 artifact 未做
 C06,共同,CI,必需检查与实际拒绝合并,PENDING,,CI 未开始
 A01,A,E6,MD/RD精确证据与修复,PENDING,,A 组待完成
 A02,A,E7,三次一致及故障场景,PENDING,,A 组待完成
 B01,B,E5,缺失make及候选来源,PASS,work/e5-01/iter-01/; work/candidate/,make not found; 4 候选; decision.json; provenance.json
-B02,B,E6,构建和同镜像运行验证,PENDING,,E6 未开始
+B02,B,E6,构建和同镜像运行验证,PASS,work/e6-own/evidence/,MISSING_MAKE→build exit 0; 同镜像 sha256:419ee407… 禁网运行 exit 0; 输出 hello E3; output_matches=true
 B03,B,E7,五场景与超时清理,PASS,work/e7-debug/gate-result.json,unit-tests + 五场景全 PASS；超时容器 4698cbaf 已清理
