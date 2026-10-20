@@ -1,0 +1,25 @@
+{
+  "provider": "DeepSeek (Claude Code dialogue session)",
+  "model_version": "deepseek-flash[1m] (identifier reported by the client)",
+  "date": "2026-10-20",
+  "prompt_path": "work/e5-01/iter-01/prompt-error-driven.txt",
+  "prompt_context_path": "work/e5-01/iter-01/prompt-context-driven.txt",
+  "raw_response_path": "work/candidate/model-response.txt",
+  "candidate_path": "work/candidate/Dockerfile",
+  "candidate_sha256": "d91d585e0ee9476b05101a8477d30dc59a63c6f55c368d177d346d5f2ebab589",
+  "manual_changes": [
+    "Removed the Markdown code fence.",
+    "Inserted a Debian mirror rewrite before apt-get to use a faster mirror on the lab server. The pinned FROM, project copy, RUN make and CMD are unchanged."
+  ],
+  "selection_reason": "Candidates 1 and 3 have the same logical instructions after formatting normalization; candidate 2 changes COPY/RUN order. Choose the first member of the matching pair.",
+  "is_recorded_replay": false,
+  "replay_alternative": "fixtures/ci-candidates/DeepSeek-E5.Dockerfile (package-recorded candidate; use --replay and mark is_recorded_replay=true if selected instead)",
+  "raw_candidate_sha256": "b9fb353d2ad4cc9f4db45d4da5cad87c6ee07aed8efb9f6b11a8e808c604a00b",
+  "build_validation": {
+    "image_id": "sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b",
+    "build_exit_code": 0,
+    "verify_exit_code": 0,
+    "stdout": "hello E3\n",
+    "verified_image_matches_built_image": true
+  }
+}

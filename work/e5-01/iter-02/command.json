@@ -1,0 +1,26 @@
+{
+  "build": [
+    "docker",
+    "build",
+    "--progress=plain",
+    "-f",
+    "work/candidate/Dockerfile",
+    "-t",
+    "course1020-draft-e5:local",
+    "work/e5-01/project"
+  ],
+  "inspect": [
+    "docker",
+    "image",
+    "inspect",
+    "course1020-draft-e5:local"
+  ],
+  "verify": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b"
+  ]
+}

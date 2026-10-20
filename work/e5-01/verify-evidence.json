@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "check": "baseline build failed",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "check": "baseline log contains make: not found",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "candidate build succeeded",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "check": "candidate sha matches decision",
+      "passed": true,
+      "detail": "d91d585e0ee9476b05101a8477d30dc59a63c6f55c368d177d346d5f2ebab589"
+    },
+    {
+      "check": "built image id matches inspect",
+      "passed": true,
+      "detail": "sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b"
+    },
+    {
+      "check": "verification exit 0",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "check": "verification output is hello E3",
+      "passed": true,
+      "detail": "'hello E3\\n'"
+    },
+    {
+      "check": "verify used the same image id",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

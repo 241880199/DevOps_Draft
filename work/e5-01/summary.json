@@ -1,0 +1,36 @@
+{
+  "track": "B",
+  "stage": "E5",
+  "baseline": {
+    "dockerfile": "work/e5-01/iter-01/Dockerfile",
+    "build_exit_code": 1,
+    "missing_make": true,
+    "log": "work/e5-01/iter-01/build-retry.log",
+    "prompts": [
+      "work/e5-01/iter-01/prompt-error-driven.txt",
+      "work/e5-01/iter-01/prompt-context-driven.txt"
+    ]
+  },
+  "candidate": {
+    "path": "work/candidate/Dockerfile",
+    "sha256": "d91d585e0ee9476b05101a8477d30dc59a63c6f55c368d177d346d5f2ebab589",
+    "selection": "work/candidate/decision.json",
+    "raw_response": "work/candidate/model-response.txt",
+    "build_exit_code": 0,
+    "build_log": "work/e5-01/candidate-build.log"
+  },
+  "verification": {
+    "image_id": "sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b",
+    "same_image_as_build": true,
+    "exit_code": 0,
+    "stdout": "hello E3\n",
+    "network": "none",
+    "log": "work/e5-01/verify.log",
+    "stderr": "work/e5-01/verify-stderr.log"
+  },
+  "environment_notes": [
+    "Direct Docker Hub and deb.debian.org were slow on this ECS; image sources were switched to m.daocloud.io with the same pinned digests.",
+    "The selected candidate adds a Debian Aliyun mirror rewrite before apt-get; this manual change is recorded in provenance.json.",
+    "The '# syntax=docker/dockerfile:1' frontend line was removed because the ECS could not resolve it from Docker Hub."
+  ]
+}

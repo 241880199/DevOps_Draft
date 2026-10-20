@@ -1,0 +1,18 @@
+{
+  "candidate_id": 4,
+  "iteration": "iter-01",
+  "strategy": "context-driven",
+  "provider_display_name": "DeepSeek (Claude Code dialogue session)",
+  "model_version": "deepseek-flash[1m] (identifier reported by the client)",
+  "acquisition": "Prompt file copied verbatim from work/e5-01/iter-01 and submitted in the Claude Code dialogue session on 2026-10-20; raw response saved verbatim next to this file.",
+  "source": "this session transcript",
+  "status": "RECEIVED_NOT_BUILT",
+  "build_result": null,
+  "program_verification_result": null,
+  "note": "Candidate text is the content of the fenced block in the associated model-response file.",
+  "manual_changes": [
+    "Inserted a Debian mirror rewrite before apt-get to use a faster mirror on the lab server. The pinned FROM, project copy, RUN make and CMD are unchanged."
+  ],
+  "candidate_sha256": "d91d585e0ee9476b05101a8477d30dc59a63c6f55c368d177d346d5f2ebab589",
+  "raw_candidate_sha256": "b9fb353d2ad4cc9f4db45d4da5cad87c6ee07aed8efb9f6b11a8e808c604a00b"
+}

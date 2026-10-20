@@ -1,10 +1,13 @@
 {
   "candidate_file": "DeepSeek-E5.Dockerfile",
-  "sha256": "ede21b0fab394071641526e2fccefc41565efb00de6fb54d9d5b906aebeb535d",
+  "sha256": "7ea539765bf3e8d2f1b17213951f934f647b39a396316455938fe44894ea3112",
   "provider": "DeepSeek",
   "acquisition": "Manual transfer of E5 error-driven prompt; no API call in CI",
   "model_version": "Not recorded",
-  "selection": "E5 candidate 1; teaching selection normalized line continuations",
+  "selection": "Package-recorded DeepSeek candidate; FROM path adapted to the lab mirror with the same digest.",
   "source_evidence": "E5-B/e5-b-XsZXMk/iter-02/Dockerfile",
-  "scope": "Recorded teaching fixture, not a new model generation result"
+  "scope": "Recorded teaching fixture, not a new model generation result; adapted only for the lab network.",
+  "manual_changes": [
+    "Changed the FROM path to m.daocloud.io with the same pinned digest for the lab ECS; no other instruction changed."
+  ]
 }

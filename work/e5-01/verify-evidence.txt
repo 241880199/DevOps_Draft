@@ -1,0 +1,9 @@
+E5-B evidence check: PASS
+baseline build failed: PASS (1)
+baseline log contains make: not found: PASS
+candidate build succeeded: PASS (0)
+candidate sha matches decision: PASS (d91d585e0ee9476b05101a8477d30dc59a63c6f55c368d177d346d5f2ebab589)
+built image id matches inspect: PASS (sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b)
+verification exit 0: PASS (0)
+verification output is hello E3: PASS ('hello E3\n')
+verify used the same image id: PASS
