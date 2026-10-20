@@ -22,7 +22,8 @@ A 组自己的 E5 MD/RD 复现仍是 A 组的任务；本文不替 A 组下结�
 | 项 | 值 |
 |---|---|
 | B 仓库 | <https://github.com/241880199/DevOps_Draft> |
-| B 提交 | `1bcf62761e26684367d935f4fab7c0b27126a702`（服务器 `/root/241880199/draft`，main） |
+| B E5 代码提交 | `1bcf62761e26684367d935f4fab7c0b27126a702`（E5 候选来源） |
+| B 当前服务镜像提交 | `47daafe42fe5bd8b7fc214fee56450e02676433a`（CI 修复后，服务镜像 `1e393cbb…`） |
 | DRAFT 服务镜像 | `course1020-draft:local` = `sha256:1e393cbbce98b48da071c7d74e4b7758fe0852c55ca909d023c23dcf6261eed1`（CI 修复后；E5 基线为 `d31f…`，`work/build-02`） |
 | E5 候选镜像 | `course1020-draft-e5:local` = `sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b` |
 | 候选 Dockerfile | `/root/241880199/draft/work/candidate/Dockerfile` |
@@ -43,7 +44,8 @@ B 组建议按平台契约的字段交接（字段名可按 A 组现有 Schema �
   "environment_id": "env-e5-b-20261020-01",
   "producer": "DRAFT / B 组 241880199",
   "source_repo": "https://github.com/241880199/DevOps_Draft",
-  "source_commit": "1bcf62761e26684367d935f4fab7c0b27126a702",
+  "source_commit": "47daafe42fe5bd8b7fc214fee56450e02676433a",
+  "e5_source_commit": "1bcf62761e26684367d935f4fab7c0b27126a702",
   "image_ref": "course1020-draft-e5:local",
   "image_id": "sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b",
   "service_image_id": "sha256:1e393cbbce98b48da071c7d74e4b7758fe0852c55ca909d023c23dcf6261eed1",
