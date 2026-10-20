@@ -20,12 +20,13 @@
 | 分支 | `main` |
 | E5 代码提交 | `1bcf62761e26684367d935f4fab7c0b27126a702`（提交说明：`E5: update B-draft lab and pin mirror image sources`） |
 | 报告/证据提交 | 紧随其后的 `docs` 提交；最终 HEAD 以 `git rev-parse HEAD` 为准 |
+| GitHub 远程 HEAD | 2026-10-20 已推送；以 `git ls-remote origin HEAD` 为准（E5 代码提交 `1bcf627`） |
 | 服务镜像 | `course1020-draft:local` = `sha256:d31f3887293d24b89c57b0f91772a309e4d00f09c2d4d0baf4319f233fddfe08` |
 | E5 候选镜像 | `course1020-draft-e5:local` = `sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b` |
 | Docker | 29.1.3（客户端与服务端） |
 | 服务镜像内 Python | 3.13.14 |
 
-注意：`/root/241880567/draft` 还是 E4 的 `8fbd6f8`。**先不要直接在该目录继续**；等当前 `main`（`1bcf627` + 报告/证据提交）推到 GitHub 后，在 241880567 的克隆里 `git pull --ff-only`，或者直接从 `/root/241880199/draft` 复制一份新克隆。不要覆盖对方未提交的文件。
+注意：`/root/241880567/draft` 还是 E4 的 `8fbd6f8`。**先不要直接在该目录继续**；当前 `main`（`1bcf627` + 报告/证据提交）已经推到 GitHub，在 241880567 的克隆里 `git pull --ff-only`，或者直接从 `/root/241880199/draft` 复制一份新克隆。不要覆盖对方未提交的文件。
 
 `work/` 在 `.gitignore` 中；E5 证据已按 `.gitignore` 的说明用 `git add -f` 纳入 `docs` 提交，服务器另有 `/root/241880199/e5-evidence.tar.gz`，本机备份在 `D:\Projects\DevOps\E5\work\`。
 
@@ -187,7 +188,7 @@ cp templates/实验报告.md templates/候选来源记录.json templates/验收�
 - [ ] CI 正常、失败、恢复三次运行及 artifact
 - [ ] main 分支保护、拒绝合并日志、最终合并记录
 - [ ] 填写报告 E6/E7/CI 三节和 `docs/验收记录.csv` 的 PENDING 项
-- [ ] 把当前 `main`（含 `1bcf627` 和 `docs` 提交）推到 GitHub（当前只在服务器本地提交）
+- [x] 当前 `main` 已推送到 GitHub（2026-10-20；远程 HEAD 以 `git ls-remote origin HEAD` 为准）
 
 ## 7. 共享服务器注意事项
 
