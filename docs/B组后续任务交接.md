@@ -8,7 +8,7 @@
 
 ## 0. 一句话状态
 
-**E5 已完成并通过本地一致性检查；E6 尚未开始；E7 本地五场景门禁预跑已 PASS；GitHub CI 第一次运行失败已定位并修复，修复提交的 CI 重跑结果待确认。** 服务器上的仓库已经包含 E5/E6/E7 全部 B-draft 代码，E6/E7 只需按本文命令继续执行，不需要重新搭环境。
+**E5 已完成并通过本地一致性检查；E6 尚未开始；E7 本地五场景门禁预跑已 PASS；GitHub CI 第一次运行失败已定位并修复，修复提交 `47daafe` 的 CI run `39416968387` 已 PASS。** 服务器上的仓库已经包含 E5/E6/E7 全部 B-draft 代码，E6/E7 只需按本文命令继续执行，不需要重新搭环境。
 
 ## 1. 服务器、仓库与镜像
 
@@ -194,7 +194,7 @@ if original[0] != proposed[0].split("@", 1)[0]:
     raise ValueError("Candidate changed the original base image tag")
 ```
 
-本组为走镜像站，把 broken fixture 也改成 `...python@sha256:f82c…`（带 digest），因此两侧永远不相等，`auto-build` 在构建前就返回 FAILED，`run_e7_b_gate.py` 读不到 `trace_id`。修复为两侧都 `split("@", 1)[0]` 再比较，并新增回归测试 `test_digest_pinned_baseline_compares_image_name`。修复后服务单测 25 passed，本地五场景门禁 `work/e7-debug` 6/6 PASS。修复提交推送后，新的 CI 运行以 GitHub Actions 为准；若仍失败，先看 gate 的 `trace_id`/`error`，不要先怀疑网络。
+本组为走镜像站，把 broken fixture 也改成 `...python@sha256:f82c…`（带 digest），因此两侧永远不相等，`auto-build` 在构建前就返回 FAILED，`run_e7_b_gate.py` 读不到 `trace_id`。修复为两侧都 `split("@", 1)[0]` 再比较，并新增回归测试 `test_digest_pinned_baseline_compares_image_name`。修复后服务单测 25 passed，本地五场景门禁 `work/e7-debug` 6/6 PASS。修复提交 `47daafe` 的 CI run `39416968387` 已完成 `success`；若后续再次失败，先看 gate 的 `trace_id`/`error`，不要先怀疑网络。
 
 ## 6. 未完成项清单
 
@@ -203,7 +203,8 @@ if original[0] != proposed[0].split("@", 1)[0]:
 - [x] E7：五场景门禁本地预跑（`work/e7-debug/gate-result.json`，6/6 PASS；正式 `work/e7-01` 可按 5.1 重跑）
 - [x] E7：超时容器清理证据（`work/e7-debug/runtime-timeout/evidence/cleanup-check/stderr.log`）
 - [x] 自己补充的一项测试 + 重新构建 + 重跑门禁（`test_digest_pinned_baseline_compares_image_name`，`work/build-03` 25 passed）
-- [ ] CI 正常、失败、恢复三次运行及 artifact（第一次 CI 失败已修复，重跑待确认；失败 PR/恢复 PR 未做）
+- [x] CI 正常门禁已恢复绿色（修复提交 `47daafe`，run `39416968387`）
+- [ ] CI 失败 PR/恢复 PR、分支保护与 artifact（未做）
 - [ ] main 分支保护、拒绝合并日志、最终合并记录
 - [ ] 填写报告 E6/E7/CI 三节和 `docs/验收记录.csv` 的 PENDING 项
 - [x] 当前 `main` 已推送到 GitHub（2026-10-20；远程 HEAD 以 `git ls-remote origin HEAD` 为准）

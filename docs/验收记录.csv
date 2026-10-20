@@ -3,7 +3,7 @@ C01,共同,环境,云主机与Docker,PASS,/root/241880199/draft,Ubuntu 22.04.5 L
 C02,共同,E5,真实复现与差异,PASS,work/e5-01/summary.json; docs/实验报告.md,初始构建 make not found; 候选构建 exit 0; 同一镜像输出 hello E3
 C03,共同,E6,输入哈希报告日志,PENDING,,E6 未开始
 C04,共同,E7,自主扩展测试,PASS,services/draft/tests/test_autobuild.py,新增 digest-pinned baseline 回归测试；build-03 25 passed
-C05,共同,CI,正常失败恢复及artifact,PENDING,,CI 未开始
+C05,共同,CI,正常失败恢复及artifact,PENDING,https://github.com/241880199/DevOps_Draft/actions/runs/39416968387,正常 run PASS；失败/恢复 PR 与 artifact 未做
 C06,共同,CI,必需检查与实际拒绝合并,PENDING,,CI 未开始
 A01,A,E6,MD/RD精确证据与修复,PENDING,,A 组待完成
 A02,A,E7,三次一致及故障场景,PENDING,/,A 组待完成
