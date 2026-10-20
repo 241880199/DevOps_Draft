@@ -6,7 +6,7 @@ C04,共同,E7,自主扩展测试,PASS,services/draft/tests/test_autobuild.py,新
 C05,共同,CI,正常失败恢复及artifact,PENDING,https://github.com/241880199/DevOps_Draft/actions/runs/39416968387,正常 run PASS；失败/恢复 PR 与 artifact 未做
 C06,共同,CI,必需检查与实际拒绝合并,PENDING,,CI 未开始
 A01,A,E6,MD/RD精确证据与修复,PENDING,,A 组待完成
-A02,A,E7,三次一致及故障场景,PENDING,/,A 组待完成
+A02,A,E7,三次一致及故障场景,PENDING,,A 组待完成
 B01,B,E5,缺失make及候选来源,PASS,work/e5-01/iter-01/; work/candidate/,make not found; 4 候选; decision.json; provenance.json
 B02,B,E6,构建和同镜像运行验证,PENDING,,E6 未开始
 B03,B,E7,五场景与超时清理,PASS,work/e7-debug/gate-result.json,unit-tests + 五场景全 PASS；超时容器 4698cbaf 已清理
