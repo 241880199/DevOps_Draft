@@ -1,0 +1,10 @@
+{
+  "track": "B",
+  "stage": "e6",
+  "time_utc": "2026-10-20T13:23:31.026781+00:00",
+  "image": "course1020-draft:local",
+  "packaging_entrypoint": "cloud-v1",
+  "replay": false,
+  "candidate_sha256": "d91d585e0ee9476b05101a8477d30dc59a63c6f55c368d177d346d5f2ebab589",
+  "candidate_source": "student supplied; see student provenance record"
+}

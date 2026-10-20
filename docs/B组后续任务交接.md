@@ -8,7 +8,7 @@
 
 ## 0. 一句话状态
 
-**E5 已完成并通过本地一致性检查；E6 尚未开始；E7 本地五场景门禁预跑已 PASS；GitHub CI 第一次运行失败已定位并修复，修复提交 `47daafe` 的 CI run `39416968387` 已 PASS。** 服务器上的仓库已经包含 E5/E6/E7 全部 B-draft 代码，E6/E7 只需按本文命令继续执行，不需要重新搭环境。
+**E5 已完成并通过本地一致性检查；E6 已在云主机完成并通过证据校验（`work/e6-own`，`trace_id` `e6-b-0ddad5da30654c8a91068d9305a65c30`）；E7 本地五场景门禁预跑已 PASS；GitHub CI 第一次运行失败已定位并修复，修复提交 `47daafe` 的 CI run `39416968387` 已 PASS。** 服务器上的仓库已经包含 E5/E6/E7 全部 B-draft 代码，E6/E7 只需按本文命令继续执行，不需要重新搭环境。
 
 ## 1. 服务器、仓库与镜像
 
@@ -125,6 +125,20 @@ python3 scripts/verify_e6_b_evidence.py --run-dir work/e6-replay/evidence
 - 服务镜像代码改动后，先用 `python3 scripts/lab_cloud.py build --out work/build-04 --build-timeout 1200` 重新构建并跑单测；当前 `work/build-03` 为 25 passed（含新增回归测试）。
 - 构建服务容器使用 `--network bridge` 访问注册表；最终程序验证仍用 `--network none`。不要把两者混为一谈。
 
+### 4.4 本次 E6 执行记录（2026-10-20 已完成）
+
+在云主机 `121.40.121.129` 的 `/root/241880199/draft` 执行；执行前工作区干净，HEAD 为 `6ded987`，E5/E6 证据均来自该主机。
+
+- 服务镜像：`course1020-draft:local`，ID `sha256:1e393cbbce98b48da071c7d74e4b7758fe0852c55ca909d023c23dcf6261eed1`，单元测试 `25 passed`（`work/build-03/`）；
+- 候选：`work/candidate/Dockerfile`，SHA-256 `d91d585e0ee9476b05101a8477d30dc59a63c6f55c368d177d346d5f2ebab589`（不是 replay）；
+- `trace_id`：`e6-b-0ddad5da30654c8a91068d9305a65c30`；
+- 第一轮 `MISSING_MAKE`，exit 1；第二轮 exit 0，镜像 `sha256:419ee407e781e6542c7f88b867eed8803d09d16be424ca5d50c2675fd57cad08`；
+- 同一镜像 ID 禁网运行 exit 0，输出 `hello E3`，`output_matches=true`；
+- `verify_e6_b_evidence.py` 输出 `passed: true`（`work/e6-own/verify-evidence.json`）；
+- `result.json` 的 `elapsed_ms=1093`：第一轮复用 E5 基础镜像层，第二轮 `apt-get` 层命中构建缓存，所以比 E5 的首次构建快很多。
+
+如果要在另一台主机复跑，按 4.1 使用新的 `--out work/e6-own-server` 即可。
+
 ## 5. E7 接手步骤
 
 ### 5.1 本地门禁
@@ -198,15 +212,15 @@ if original[0] != proposed[0].split("@", 1)[0]:
 
 ## 6. 未完成项清单
 
-- [ ] E6：两轮构建与同镜像运行验证（`work/e6-own`）
-- [ ] E6：`verify_e6_b_evidence.py` 通过
+- [x] E6：两轮构建与同镜像运行验证（`work/e6-own`；`MISSING_MAKE` → exit 0 → 同镜像 `419ee407…` 输出 `hello E3`）
+- [x] E6：`verify_e6_b_evidence.py` 通过（`work/e6-own/verify-evidence.json`，`passed: true`）
 - [x] E7：五场景门禁本地预跑（`work/e7-debug/gate-result.json`，6/6 PASS；正式 `work/e7-01` 可按 5.1 重跑）
 - [x] E7：超时容器清理证据（`work/e7-debug/runtime-timeout/evidence/cleanup-check/stderr.log`）
 - [x] 自己补充的一项测试 + 重新构建 + 重跑门禁（`test_digest_pinned_baseline_compares_image_name`，`work/build-03` 25 passed）
 - [x] CI 正常门禁已恢复绿色（修复提交 `47daafe`，run `39416968387`）
 - [ ] CI 失败 PR/恢复 PR、分支保护与 artifact（未做）
 - [ ] main 分支保护、拒绝合并日志、最终合并记录
-- [ ] 填写报告 E6/E7/CI 三节和 `docs/验收记录.csv` 的 PENDING 项
+- [ ] 填写报告 E7/CI 两节和 `docs/验收记录.csv` 的剩余 PENDING 项（E6 节和 C03/B02 已填）
 - [x] 当前 `main` 已推送到 GitHub（2026-10-20；远程 HEAD 以 `git ls-remote origin HEAD` 为准）
 
 ## 7. 共享服务器注意事项
