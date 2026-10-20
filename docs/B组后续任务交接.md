@@ -8,7 +8,7 @@
 
 ## 0. 一句话状态
 
-**E5 已完成并通过本地一致性检查；E6、E7、GitHub CI 均未开始。** 服务器上的仓库已经包含 E5/E6/E7 全部 B-draft 代码，E6/E7 只需按本文命令继续执行，不需要重新搭环境。
+**E5 已完成并通过本地一致性检查；E6 尚未开始；E7 本地五场景门禁预跑已 PASS；GitHub CI 第一次运行失败已定位并修复，修复提交的 CI 重跑结果待确认。** 服务器上的仓库已经包含 E5/E6/E7 全部 B-draft 代码，E6/E7 只需按本文命令继续执行，不需要重新搭环境。
 
 ## 1. 服务器、仓库与镜像
 
@@ -21,8 +21,10 @@
 | E5 代码提交 | `1bcf62761e26684367d935f4fab7c0b27126a702`（提交说明：`E5: update B-draft lab and pin mirror image sources`） |
 | 报告/证据提交 | 紧随其后的 `docs` 提交；最终 HEAD 以 `git rev-parse HEAD` 为准 |
 | GitHub 远程 HEAD | 2026-10-20 已推送；以 `git ls-remote origin HEAD` 为准（E5 代码提交 `1bcf627`） |
-| 服务镜像 | `course1020-draft:local` = `sha256:d31f3887293d24b89c57b0f91772a309e4d00f09c2d4d0baf4319f233fddfe08` |
+| E5 基线服务镜像 | `course1020-draft:local`（`work/build-02`）= `sha256:d31f3887293d24b89c57b0f91772a309e4d00f09c2d4d0baf4319f233fddfe08` |
+| CI 修复后服务镜像 | `course1020-draft:local`（`work/build-03`）= `sha256:1e393cbbce98b48da071c7d74e4b7758fe0852c55ca909d023c23dcf6261eed1`，25 passed |
 | E5 候选镜像 | `course1020-draft-e5:local` = `sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b` |
+| E7 本地预跑 | `work/e7-debug/gate-result.json`：`passed: true`，unit-tests + 五场景 6/6 |
 | Docker | 29.1.3（客户端与服务端） |
 | 服务镜像内 Python | 3.13.14 |
 
@@ -120,7 +122,7 @@ python3 scripts/verify_e6_b_evidence.py --run-dir work/e6-replay/evidence
 
 - 候选必须保留 `RUN make` 和 `CMD ["./hello"]`；E7 的故障注入依赖这两行。
 - `lab_cloud.py e6` 每次使用新的 `--out` 目录；已有目录非空会被拒绝。
-- 服务镜像代码改动后，先用 `python3 scripts/lab_cloud.py build --out work/build-03 --build-timeout 1200` 重新构建并跑单测（当前基线 24 passed）。
+- 服务镜像代码改动后，先用 `python3 scripts/lab_cloud.py build --out work/build-04 --build-timeout 1200` 重新构建并跑单测；当前 `work/build-03` 为 25 passed（含新增回归测试）。
 - 构建服务容器使用 `--network bridge` 访问注册表；最终程序验证仍用 `--network none`。不要把两者混为一谈。
 
 ## 5. E7 接手步骤
@@ -137,14 +139,18 @@ cat work/e7-01/gate/gate-result.json
 
 预期：`E7_GATE_EXIT_CODE=0`；服务单元测试通过；五个场景 `success`、`wrong-output`、`invalid-candidate`、`build-failed`、`runtime-timeout` 全部 `passed=true`；`runtime-timeout` 的 `verify-container-id.txt` 对应容器已被清理（`docker container inspect` 返回 no such）。
 
-参考记录：教师试跑中 E6 为 13 项服务测试，E7 扩为 24 项，加入并修复门禁测试后为 25 项。以本次实际日志为准。
+**本地预跑已经通过**：为定位 CI 失败，直接运行了 CI 同一脚本 `python3 scripts/run_e7_b_gate.py --image course1020-draft:local --candidate work/candidate/Dockerfile --out work/e7-debug --build-timeout 300`，`work/e7-debug/gate-result.json` 为 `passed: true`（unit-tests + 五场景 6/6），超时容器 `4698cbaf…` 已清理。正式提交时仍建议用上面的 `lab_cloud.py gate` 生成 `work/e7-01/`，两者入口不同但都调用同一门禁脚本。
 
-### 5.2 补充一项测试
+参考记录：教师试跑中 E6 为 13 项服务测试，E7 扩为 24 项，加入并修复门禁测试后为 25 项；本次 `work/build-03` 为 25 passed。
 
-按验收清单“自己补充的一项测试”要求：
+### 5.2 补充一项测试（本次已完成一项）
+
+本次已新增 `services/draft/tests/test_autobuild.py::test_digest_pinned_baseline_compares_image_name`，覆盖 broken fixture 的 `FROM` 带 digest 的情况；`work/build-03` 为 25 passed。E7 验收的“自己补充一项测试”已满足。
+
+如果还想再加一项，按以下步骤：
 
 1. 在 `services/draft/tests/` 新增一个针对真实行为的测试（例如候选约束校验、输出匹配、超时状态或清理逻辑）；
-2. 重新构建服务镜像 `python3 scripts/lab_cloud.py build --out work/build-03 --build-timeout 1200`；
+2. 重新构建服务镜像 `python3 scripts/lab_cloud.py build --out work/build-04 --build-timeout 1200`；
 3. 重跑 `lab_cloud.py gate`，确认测试数增加且门禁仍为 0；
 4. 在报告“E7”和“自主扩展测试”中写清测试检查了什么、修改了哪些文件、运行结果。
 
@@ -178,14 +184,26 @@ cp templates/实验报告.md templates/候选来源记录.json templates/验收�
 
 注意：如果服务器上 `gh auth login` 无法打开浏览器，按文档在电脑浏览器打开 <https://github.com/login/device> 输入验证码；不要把 Token 写进仓库、日志或镜像。
 
+### 5.4 第一次 CI 失败（已修复，接手人不要重复排查）
+
+第一次 push 后 GitHub Actions 的 `e7-b-quality-gate` 在 gate 步骤失败（run `39416326416`、`39416391924`），五个场景都报 `Missing trace_id`，`invalid-candidate` 报 `Changed CMD candidate was not rejected before building`。根因是 `prepare_candidate` 的基线比较：
+
+```python
+# 修复前：original[0] 是 broken fixture 的完整 FROM 行，proposed 侧却先去掉 digest
+if original[0] != proposed[0].split("@", 1)[0]:
+    raise ValueError("Candidate changed the original base image tag")
+```
+
+本组为走镜像站，把 broken fixture 也改成 `...python@sha256:f82c…`（带 digest），因此两侧永远不相等，`auto-build` 在构建前就返回 FAILED，`run_e7_b_gate.py` 读不到 `trace_id`。修复为两侧都 `split("@", 1)[0]` 再比较，并新增回归测试 `test_digest_pinned_baseline_compares_image_name`。修复后服务单测 25 passed，本地五场景门禁 `work/e7-debug` 6/6 PASS。修复提交推送后，新的 CI 运行以 GitHub Actions 为准；若仍失败，先看 gate 的 `trace_id`/`error`，不要先怀疑网络。
+
 ## 6. 未完成项清单
 
 - [ ] E6：两轮构建与同镜像运行验证（`work/e6-own`）
 - [ ] E6：`verify_e6_b_evidence.py` 通过
-- [ ] E7：五场景门禁（`work/e7-01`）
-- [ ] E7：超时容器清理证据
-- [ ] 自己补充的一项测试 + 重新构建 + 重跑门禁
-- [ ] CI 正常、失败、恢复三次运行及 artifact
+- [x] E7：五场景门禁本地预跑（`work/e7-debug/gate-result.json`，6/6 PASS；正式 `work/e7-01` 可按 5.1 重跑）
+- [x] E7：超时容器清理证据（`work/e7-debug/runtime-timeout/evidence/cleanup-check/stderr.log`）
+- [x] 自己补充的一项测试 + 重新构建 + 重跑门禁（`test_digest_pinned_baseline_compares_image_name`，`work/build-03` 25 passed）
+- [ ] CI 正常、失败、恢复三次运行及 artifact（第一次 CI 失败已修复，重跑待确认；失败 PR/恢复 PR 未做）
 - [ ] main 分支保护、拒绝合并日志、最终合并记录
 - [ ] 填写报告 E6/E7/CI 三节和 `docs/验收记录.csv` 的 PENDING 项
 - [x] 当前 `main` 已推送到 GitHub（2026-10-20；远程 HEAD 以 `git ls-remote origin HEAD` 为准）

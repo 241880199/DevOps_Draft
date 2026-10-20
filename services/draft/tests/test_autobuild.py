@@ -17,6 +17,12 @@ class CandidateTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             prepare_candidate(BASE, CANDIDATE.replace("python:3.13-slim", "ubuntu:24.04"))
 
+    def test_digest_pinned_baseline_compares_image_name(self):
+        # The lab fixture pins the baseline image by digest; the candidate may
+        # add a tag before its digest. Only the image name/tag must match.
+        base = BASE.replace("FROM python:3.13-slim", "FROM python:3.13-slim@sha256:" + "b" * 64)
+        self.assertEqual(prepare_candidate(base, CANDIDATE), BASE.replace("FROM python:3.13-slim", PIN))
+
     def test_unpinned_candidate_rejected(self):
         with self.assertRaises(ValueError):
             prepare_candidate(BASE, CANDIDATE.replace(PIN, "FROM python:3.13-slim"))

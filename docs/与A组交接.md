@@ -23,7 +23,7 @@ A 组自己的 E5 MD/RD 复现仍是 A 组的任务；本文不替 A 组下结�
 |---|---|
 | B 仓库 | <https://github.com/241880199/DevOps_Draft> |
 | B 提交 | `1bcf62761e26684367d935f4fab7c0b27126a702`（服务器 `/root/241880199/draft`，main） |
-| DRAFT 服务镜像 | `course1020-draft:local` = `sha256:d31f3887293d24b89c57b0f91772a309e4d00f09c2d4d0baf4319f233fddfe08` |
+| DRAFT 服务镜像 | `course1020-draft:local` = `sha256:1e393cbbce98b48da071c7d74e4b7758fe0852c55ca909d023c23dcf6261eed1`（CI 修复后；E5 基线为 `d31f…`，`work/build-02`） |
 | E5 候选镜像 | `course1020-draft-e5:local` = `sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b` |
 | 候选 Dockerfile | `/root/241880199/draft/work/candidate/Dockerfile` |
 | 候选 SHA-256 | `d91d585e0ee9476b05101a8477d30dc59a63c6f55c368d177d346d5f2ebab589` |
@@ -46,6 +46,7 @@ B 组建议按平台契约的字段交接（字段名可按 A 组现有 Schema �
   "source_commit": "1bcf62761e26684367d935f4fab7c0b27126a702",
   "image_ref": "course1020-draft-e5:local",
   "image_id": "sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b",
+  "service_image_id": "sha256:1e393cbbce98b48da071c7d74e4b7758fe0852c55ca909d023c23dcf6261eed1",
   "dockerfile_path": "work/candidate/Dockerfile",
   "dockerfile_sha256": "d91d585e0ee9476b05101a8477d30dc59a63c6f55c368d177d346d5f2ebab589",
   "base_image": "m.daocloud.io/docker.io/library/python@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f",
