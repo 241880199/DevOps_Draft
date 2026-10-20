@@ -15,8 +15,7 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
-# E4 的 B 组样例较小；标称 4 GiB 的 ECS 可能只报告约 3.5 GiB 可见内存。
-MIN = {"cpus": 2, "mem_gib": 3.5, "disk_gib": 40}      # E4 最低可见资源
+MIN = {"cpus": 2, "mem_gib": 4, "disk_gib": 40}        # 最低
 REC = {"cpus": 4, "mem_gib": 8, "disk_gib": 100}       # 建议（DRAFT 后续要构建真实项目）
 
 TOOLS = [  # (名称, 版本命令, 是否必需)
