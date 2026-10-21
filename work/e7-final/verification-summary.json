@@ -1,0 +1,44 @@
+{
+  "verified_at": "2026-10-21T04:51:22Z",
+  "repository": "https://github.com/241880199/DevOps_Draft",
+  "base_main_commit": "d8edb5f86ea39b24c11f738b03e95c511e10e918",
+  "latest_ci_before_demo": {
+    "run_id": 39433211535,
+    "conclusion": "success",
+    "unit_tests": "25 passed",
+    "gate": "6/6 passed"
+  },
+  "rejection_demo": {
+    "pull_request": 2,
+    "failed_commit": "be7dd0a827ac25f895e35c7bcc1b39473810db94",
+    "failed_run_id": 39545805329,
+    "failed_result": "1 failed, 25 passed",
+    "pr_state_during_failure": "OPEN / UNSTABLE / MERGEABLE",
+    "policy_blocked": false,
+    "reason": "main branch protection is not configured"
+  },
+  "recovery": {
+    "fixed_commit": "224e933e67d6dfd2f559cbee805e1e6eeb93f667",
+    "successful_run_id": 39545968737,
+    "unit_tests": "26 passed",
+    "gate": "6/6 passed",
+    "merge_commit": "73126dac71f41dfc18ae1b48257a9443dec7402e",
+    "pull_request_state": "MERGED"
+  },
+  "branch_protection": {
+    "status": "PENDING",
+    "configuration": "ci/B-main-protection.json",
+    "required_check": "e7-b-quality-gate",
+    "app_id": 15368,
+    "strict": true,
+    "enforce_admins": true,
+    "required_approvals": 0,
+    "blocker": "Authenticated account yae0627 has write access but admin=false"
+  },
+  "local_verification": {
+    "unit_tests": "26 passed",
+    "compileall": "passed",
+    "secret_scan": "passed"
+  },
+  "scope": "E7 teaching fixture replay, not a three-project benchmark"
+}

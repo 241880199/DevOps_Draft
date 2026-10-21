@@ -1,6 +1,6 @@
 # B 组（DRAFT）E5 → E6/E7 交接文档
 
-更新日期：2026-10-20
+更新日期：2026-10-21
 
 交接人：241880199（B 轨道）
 
@@ -8,7 +8,7 @@
 
 ## 0. 一句话状态
 
-**E5 已完成并通过本地一致性检查；E6 已在云主机完成并通过证据校验（`work/e6-own`，`trace_id` `e6-b-0ddad5da30654c8a91068d9305a65c30`）；E7 本地五场景门禁预跑已 PASS；GitHub CI 第一次运行失败已定位并修复，修复提交 `47daafe` 的 CI run `39416968387` 已 PASS。** 服务器上的仓库已经包含 E5/E6/E7 全部 B-draft 代码，E6/E7 只需按本文命令继续执行，不需要重新搭环境。
+**E5 已完成并通过本地一致性检查；E6 已在云主机完成并通过证据校验（`work/e6-own`，`trace_id` `e6-b-0ddad5da30654c8a91068d9305a65c30`）；E7 的门禁、故意失败、恢复和 PR 合并均已 PASS。唯一未完成项是 main 分支保护与实际拒绝合并：当前 GitHub 账号不是仓库管理员。**
 
 ## 1. 服务器、仓库与镜像
 
@@ -25,6 +25,7 @@
 | CI 修复后服务镜像 | `course1020-draft:local`（`work/build-03`）= `sha256:1e393cbbce98b48da071c7d74e4b7758fe0852c55ca909d023c23dcf6261eed1`，25 passed |
 | E5 候选镜像 | `course1020-draft-e5:local` = `sha256:0a62ffe30dd2cad37b5c3aac90e16a79b6930702513fb117d28380f7f01d645b` |
 | E7 本地预跑 | `work/e7-debug/gate-result.json`：`passed: true`，unit-tests + 五场景 6/6 |
+| E7 CI 闭环 | PR #2；失败 run `39545805329`；恢复 run `39545968737`；合并提交 `73126dac` |
 | Docker | 29.1.3（客户端与服务端） |
 | 服务镜像内 Python | 3.13.14 |
 
@@ -170,12 +171,22 @@ cat work/e7-01/gate/gate-result.json
 
 ### 5.3 GitHub CI 与合并门禁
 
-服务器当前没有 `gh`。两种做法：
+2026-10-21 已在本机完成正常、故意失败、修复恢复和合并闭环。PR #2 故意错误断言的失败运行是 `39545805329`（`1 failed, 25 passed`），修复后的运行是 `39545968737`（`26 passed`、五场景全通过），PR 已合并为 `73126dac71f41dfc18ae1b48257a9443dec7402e`。
 
-- 在服务器安装：`sudo apt-get update && sudo apt-get install -y gh`，然后按学生包 `docs/04_GitHub_CI与合并门禁.md` 执行；
-- 或者在本机用 `gh` 操作 GitHub，服务器只负责代码和 `work/` 证据；推送前先确认远程仓库和分支。
+**未完成的是分支保护。** 当前 `gh` 登录账号为 `yae0627`，对仓库只有 `WRITE`，`admin=false`。配置文件已经保存为 `ci/B-main-protection.json`，但 `PUT /repos/241880199/DevOps_Draft/branches/main/protection` 返回 404。失败 PR 当时为 `OPEN / UNSTABLE / MERGEABLE`，并未被保护策略阻止，不能把该状态当作拒绝合并证据。
 
-**E7 前置：补齐 `ci/` 与 `templates/`。** 本仓库根目录是 B-draft 本身，没有学生包里的 `labs/B-draft` 这一层；学生包的 `ci/` 和 `templates/` 目前**不在**仓库里。开始 CI 前，从 `DevOps_1020_Student_Cloud/` 复制以下最小集合到仓库根目录：
+需要仓库 owner `241880199` 执行：
+
+```bash
+repo=241880199/DevOps_Draft
+gh api --method PUT "repos/$repo/branches/main/protection" \
+  --input ci/B-main-protection.json \
+  --jq '{checks: .required_status_checks.checks, strict: .required_status_checks.strict, enforce_admins: .enforce_admins.enabled}'
+```
+
+随后重新创建一个故意失败 PR，保存 `gh pr merge` 退出码 1、PR 的 `OPEN / BLOCKED` 和失败日志；再修正同一 PR，绿色后合并。不要把 GitHub Token 写入仓库、日志或镜像。
+
+`ci/B-main-protection.json` 与门禁回归测试已经纳入仓库。其余学生包模板仍可按需复制：
 
 ```bash
 # 在学生包解压目录执行，目标路径按本组仓库位置调整
@@ -190,11 +201,11 @@ cp templates/实验报告.md templates/候选来源记录.json templates/验收�
 
 必须完成的闭环：
 
-1. 正常 push 触发 `e7-b-quality-gate`，保存 run URL 和 artifact；
-2. 配置 main 分支保护：必需检查 `e7-b-quality-gate`、App ID `15368`、`strict=true`、`enforce_admins=true`、通过 PR 合并、审批 0；
-3. 创建故意失败的 PR（`ci/rejection-demo/B/test_ci_reject_demo.py`），确认 `OPEN / BLOCKED`，普通 `gh pr merge` 退出码 1；
-4. 换成 `ci/rejection-demo/B/fixed/test_ci_reject_demo.py`，确认最新提交检查通过、PR 合并成功；
-5. 下载失败和恢复两次的 artifact、保护配置、拒绝合并日志、最终合并记录，放到 `work/ci-rejection/`、`work/ci-recovery/`。
+1. 正常 push 与 PR 的 `e7-b-quality-gate` 已完成；
+2. 故意失败、修正恢复、artifact 和最终合并已完成；
+3. owner 应用 `ci/B-main-protection.json`；
+4. 新 PR 验证 `OPEN / BLOCKED` 与普通合并退出码 1；
+5. 把保护配置和拒绝合并日志补入 `work/ci-rejection/`。
 
 注意：如果服务器上 `gh auth login` 无法打开浏览器，按文档在电脑浏览器打开 <https://github.com/login/device> 输入验证码；不要把 Token 写进仓库、日志或镜像。
 
@@ -217,11 +228,12 @@ if original[0] != proposed[0].split("@", 1)[0]:
 - [x] E7：五场景门禁本地预跑（`work/e7-debug/gate-result.json`，6/6 PASS；正式 `work/e7-01` 可按 5.1 重跑）
 - [x] E7：超时容器清理证据（`work/e7-debug/runtime-timeout/evidence/cleanup-check/stderr.log`）
 - [x] 自己补充的一项测试 + 重新构建 + 重跑门禁（`test_digest_pinned_baseline_compares_image_name`，`work/build-03` 25 passed）
-- [x] CI 正常门禁已恢复绿色（修复提交 `47daafe`，run `39416968387`）
-- [ ] CI 失败 PR/恢复 PR、分支保护与 artifact（未做）
-- [ ] main 分支保护、拒绝合并日志、最终合并记录
-- [ ] 填写报告 E7/CI 两节和 `docs/验收记录.csv` 的剩余 PENDING 项（E6 节和 C03/B02 已填）
-- [x] 当前 `main` 已推送到 GitHub（2026-10-20；远程 HEAD 以 `git ls-remote origin HEAD` 为准）
+- [x] CI 正常门禁绿色（最新 main run `39433211535`）
+- [x] CI 故意失败（run `39545805329`，`1 failed, 25 passed`）
+- [x] CI 修复恢复、artifact 与 PR #2 合并（run `39545968737`，`26 passed`）
+- [ ] main 分支保护与实际拒绝合并（等待 owner `241880199`）
+- [x] 更新报告 E7/CI 两节和 `docs/验收记录.csv`
+- [x] 当前 `main` 已包含 PR #2 合并提交 `73126dac`
 
 ## 7. 共享服务器注意事项
 
