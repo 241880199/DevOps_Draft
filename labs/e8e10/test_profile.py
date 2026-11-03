@@ -39,4 +39,22 @@ class ProfileTests(unittest.TestCase):
         (self.p/'Makefile').write_text((self.p/'Makefile').read_text().replace('-O0','-include unknown.h'))
         with self.assertRaisesRegex(ValueError,'UNSUPPORTED_FLAGS'):scan(self.p)
 
+class StudentE8B(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
+        self.p=Path(self.tmp.name)/'sample';fixture(self.p)
+
+    def test_redundant_only_report_does_not_delete(self):
+        r=scan(self.p)
+        r['findings']=[f for f in r['findings'] if f['type']=='REDUNDANT']
+        self.assertEqual(
+            {(f['type'],f['target'],f['dependency']) for f in r['findings']},
+            {('REDUNDANT','main.o','unused.h')})
+        before=(self.p/'Makefile').read_bytes()
+        diff,plan=patch(self.p,r)
+        self.assertEqual(diff,'')
+        self.assertEqual(plan,[])
+        self.assertEqual((self.p/'Makefile').read_bytes(),before)
+        self.assertIn('main.o: main.c unused.h',(self.p/'Makefile').read_text())
+
 if __name__=='__main__':unittest.main()
