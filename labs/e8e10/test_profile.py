@@ -57,4 +57,19 @@ class StudentE8B(unittest.TestCase):
         self.assertEqual((self.p/'Makefile').read_bytes(),before)
         self.assertIn('main.o: main.c unused.h',(self.p/'Makefile').read_text())
 
+class StudentE9B(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
+        self.p=Path(self.tmp.name)/'sample';fixture(self.p,'macro')
+
+    def test_duplicate_missing_finding_is_applied_once(self):
+        report=scan(self.p)
+        missing=next(f for f in report['findings'] if f['type']=='MISSING')
+        report['findings'].append(dict(missing))
+        before=(self.p/'Makefile').read_bytes()
+        diff,plan=patch(self.p,report)
+        self.assertEqual(diff.count('+DEPS = main.c unused.h config.h'),1)
+        self.assertEqual(plan,[{'target':'main.o','dependency':'config.h','style':'macro'}])
+        self.assertEqual((self.p/'Makefile').read_bytes(),before)
+
 if __name__=='__main__':unittest.main()

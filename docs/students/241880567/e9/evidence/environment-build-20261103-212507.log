@@ -1,0 +1,52 @@
+IMAGE=course-e8e10:241880567
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.98kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for m.daocloud.io/docker.io/library/python:3.13-slim@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#2 DONE 2.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 106B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 35.01kB done
+#4 DONE 0.0s
+
+#5 [1/8] FROM m.daocloud.io/docker.io/library/python:3.13-slim@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+#5 resolve m.daocloud.io/docker.io/library/python:3.13-slim@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74 0.0s done
+#5 DONE 0.0s
+
+#6 [3/8] COPY requirements-dev.lock /tmp/requirements-dev.lock
+#6 CACHED
+
+#7 [4/8] RUN python3 -m pip install       --index-url https://pypi.tuna.tsinghua.edu.cn/simple       --timeout 60 --retries 3       --no-cache-dir --require-hashes -r /tmp/requirements-dev.lock  && python3 -m pip freeze | sed 's/^/pip:/' >> /opt/toolchain.lock
+#7 CACHED
+
+#8 [6/8] WORKDIR /app
+#8 CACHED
+
+#9 [5/8] RUN useradd --create-home --uid 10001 app  && install -d -o app -g app /app
+#9 CACHED
+
+#10 [2/8] RUN sed -i       -e 's|https\?://deb.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g'       -e 's|https\?://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g'       -e 's|https\?://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g'       /etc/apt/sources.list.d/debian.sources  && apt-get -o Acquire::ForceIPv4=true -o Acquire::Retries=3 update  && apt-get -o Acquire::ForceIPv4=true -o Acquire::Retries=3 install -y --no-install-recommends gcc make libc6-dev strace git  && rm -rf /var/lib/apt/lists/*  && dpkg-query -W -f='${Package}=${Version}\n' gcc make libc6-dev strace git > /opt/toolchain.lock  && echo "python3=$(python3 -c 'import platform; print(platform.python_version())')" >> /opt/toolchain.lock  && echo "arch=$(dpkg --print-architecture)" >> /opt/toolchain.lock
+#10 CACHED
+
+#11 [7/8] COPY --chown=app:app services/buildchecker/ /app/
+#11 CACHED
+
+#12 [8/8] COPY --chown=app:app fixtures/ /app/fixtures/
+#12 CACHED
+
+#13 exporting to image
+#13 exporting layers done
+#13 exporting manifest sha256:5d039c64bba7b71d1e5a5647187d3b27d8ccc94938471b14ecf5467e0ef86407 done
+#13 exporting config sha256:506a02aba7bb2422dbd95ddd58127afc3bfc7e71d2a2199d9b9e8ec8243beaf3 done
+#13 exporting attestation manifest sha256:4c057cc0a0ed407a1b6cd9baf2a2bc0c463a6934503a9c59f1ae0ab166f0effe 0.0s done
+#13 exporting manifest list sha256:228486ff2a235bb6b98bd8e16bf8d9385c8cc7cc7ee37d8b2254fb37b6bb4746 done
+#13 naming to docker.io/library/course-e8e10:241880567 done
+#13 unpacking to docker.io/library/course-e8e10:241880567 done
+#13 DONE 0.1s
