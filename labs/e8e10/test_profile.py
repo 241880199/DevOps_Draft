@@ -72,4 +72,43 @@ class StudentE9B(unittest.TestCase):
         self.assertEqual(plan,[{'target':'main.o','dependency':'config.h','style':'macro'}])
         self.assertEqual((self.p/'Makefile').read_bytes(),before)
 
+class StudentE10B(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
+        self.p=Path(self.tmp.name)/'sample';fixture(self.p)
+
+    def test_build_failure_keeps_original_makefile(self):
+        from lab import validate
+        root=Path(self.tmp.name);p=self.p
+        diff,plan=patch(p,scan(p))
+        candidate=root/'candidate.patch';candidate.write_text(diff)
+        before=(p/'Makefile').read_bytes()
+        (p/'main.c').write_text('this is invalid C;\n')
+        result=validate(p,candidate,root/'validation')
+        self.assertTrue(result['checks']['patch_applies'])
+        self.assertFalse(result['checks'].get('build',False))
+        self.assertIn('COMMAND_FAILED',result['error'])
+        self.assertFalse(result['accepted'])
+        self.assertTrue(result['rollback'])
+        self.assertTrue(result['source_unchanged'])
+        self.assertEqual((p/'Makefile').read_bytes(),before)
+
+    def test_builds_but_missing_dependency_rejected(self):
+        from lab import validate,run
+        root=Path(self.tmp.name);p=self.p
+        main_before=(p/'main.c').read_text();mk_before=(p/'Makefile').read_text()
+        (p/'main.c').write_text('#include "extra.h"\n'+main_before)
+        (p/'Makefile').write_text(mk_before.replace('main.o: main.c unused.h','main.o: main.c unused.h config.h'))
+        diff=run(['git','diff'],p)
+        candidate=root/'builds-but-md.patch';candidate.write_text(diff)
+        (p/'main.c').write_text(main_before);(p/'Makefile').write_text(mk_before)
+        before=(p/'Makefile').read_bytes()
+        result=validate(p,candidate,root/'validation2')
+        self.assertEqual(result['checks'],{'patch_applies':True,'build':True,'test':True,'header_change':True,'no_missing':False})
+        self.assertIsNone(result['error'])
+        self.assertFalse(result['accepted'])
+        self.assertTrue(result['rollback'])
+        self.assertTrue(result['source_unchanged'])
+        self.assertEqual((p/'Makefile').read_bytes(),before)
+
 if __name__=='__main__':unittest.main()
