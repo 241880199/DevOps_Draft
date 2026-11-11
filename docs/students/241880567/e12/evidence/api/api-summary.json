@@ -1,0 +1,18 @@
+{
+  "job_id": "job-e53da46e0bc84074ada436002fef0dab",
+  "status": "SUCCEEDED",
+  "checks": {
+    "candidate.patch": {
+      "manifest": "88074f66c291dcad1344c48f6a2b9ddd42d235d9d0415c85fb33310c5b7cb2af",
+      "body": "88074f66c291dcad1344c48f6a2b9ddd42d235d9d0415c85fb33310c5b7cb2af",
+      "header": "88074f66c291dcad1344c48f6a2b9ddd42d235d9d0415c85fb33310c5b7cb2af",
+      "match": true
+    },
+    "validation/validation.json": {
+      "manifest": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+      "body": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+      "header": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+      "match": true
+    }
+  }
+}

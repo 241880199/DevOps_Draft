@@ -1,0 +1,253 @@
+{
+  "date": "2026-11-11",
+  "server": "121.40.121.129",
+  "workspace": "/root/241880567/draft",
+  "source": {
+    "b_repo": "https://github.com/241880199/DevOps_Draft.git",
+    "b_main": "71b40c434f522131ca97cae09f3360d970694180",
+    "a_repo": "https://github.com/Ezio927/DevOps_BuildChecker.git",
+    "a_main": "834521499b3d73c01d5b4305df24f1425d864d8e"
+  },
+  "fixed": {
+    "job_id": "job-2eeae68d865a4a3a802eed050059d8ae",
+    "trace_id": "trace-f732929c20bd4ba68df2a007c5c13e46",
+    "status": "SUCCEEDED",
+    "base_commit": "9dd9332edf726cfbe351ba85c70a590952759b28",
+    "target_commit": "da75b85362ff04ebce89b2919eebc689edc06602",
+    "error": null,
+    "stages": [
+      "draft",
+      "full-check",
+      "incremental-check",
+      "repair",
+      "recheck"
+    ]
+  },
+  "fixed_recheck": {
+    "commit": "da75b85362ff04ebce89b2919eebc689edc06602",
+    "status": "SUCCEEDED",
+    "accepted": true,
+    "checks": {
+      "patch_applies": true,
+      "build": true,
+      "test": true,
+      "header_change": true,
+      "no_missing": true
+    },
+    "findings": [
+      {
+        "type": "REDUNDANT",
+        "target": "main.o",
+        "dependency": "unused.h",
+        "evidence": [
+          {
+            "source": "make_database",
+            "artifact": "make-db.txt",
+            "line": 1052,
+            "declaration": "main.o: main.c unused.h config.h extra.h"
+          }
+        ],
+        "scope": "Not observed in this recipe job under this build configuration"
+      }
+    ]
+  },
+  "a_controlled": {
+    "job_id": "job-83849dc677cb4603859c93defba68bbb",
+    "trace_id": "trace-5558519af22241b496cb738069d68c89",
+    "status": "SUCCEEDED",
+    "base_commit": "95daee3e19278716f7564c754f854d1066ada8eb",
+    "target_commit": "48382d566454999b0b1585e5cd31fd8884a2e79e",
+    "error": null,
+    "stages": [
+      "full-check",
+      "incremental-check"
+    ]
+  },
+  "a_external": {
+    "job_id": "job-96b0363cee494ae882b706e3afccd337",
+    "trace_id": "trace-dee227fe6e8b4cd78a965b44392bfe93",
+    "status": "SUCCEEDED",
+    "base_commit": "add734a17749506ad841c9d58c05e787111464ae",
+    "target_commit": "77b40fd134d6e237e78ba0327d2c7605787c3981",
+    "error": null,
+    "stages": [
+      "full-check",
+      "incremental-check"
+    ]
+  },
+  "a_external_findings": [
+    {
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "config.h"
+    },
+    {
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "extra.h"
+    },
+    {
+      "type": "REDUNDANT",
+      "target": "main.o",
+      "dependency": "unused.h"
+    }
+  ],
+  "handoff": {
+    "job_id": "job-ba1970826b434bba8ad7390fb25e00ac",
+    "trace_id": "trace-a5c2e90e6aee4091960b680c70b70eb9",
+    "status": "SUCCEEDED",
+    "base_commit": "95daee3e19278716f7564c754f854d1066ada8eb",
+    "target_commit": "871bcf9a31a4017727b2be9841564fd7de617580",
+    "error": null,
+    "stages": [
+      "draft",
+      "full-check",
+      "incremental-check",
+      "repair",
+      "recheck"
+    ]
+  },
+  "handoff_provenance": {
+    "source_job_id": "job-a76de78f81e5461590eab01cd8c3c162",
+    "source_trace_id": "trace-a5656ab5adbb455a9f6c3e48c1318afe",
+    "source_kind": "incremental-check",
+    "source_sha256": "8614db7dc282a0b2524452ffc6d7ebf3ea33accda7a6fc970d37791793aaa3e9"
+  },
+  "handoff_recheck": {
+    "commit": "871bcf9a31a4017727b2be9841564fd7de617580",
+    "status": "SUCCEEDED",
+    "accepted": true,
+    "checks": {
+      "patch_applies": true,
+      "build": true,
+      "test": true,
+      "header_change": true,
+      "no_missing": true
+    },
+    "findings": [
+      {
+        "type": "REDUNDANT",
+        "target": "main.o",
+        "dependency": "unused.h",
+        "evidence": [
+          {
+            "source": "make_database",
+            "artifact": "make-db.txt",
+            "line": 1052,
+            "declaration": "main.o: main.c unused.h config.h extra.h"
+          }
+        ],
+        "scope": "Not observed in this recipe job under this build configuration"
+      }
+    ]
+  },
+  "real": {
+    "job_id": "job-61e9d0fa19e54d3f81d927f9b60b2489",
+    "trace_id": "trace-268ebeaa46234bf2a811e4fd90a0afc7",
+    "status": "SUCCEEDED",
+    "base_commit": "add734a17749506ad841c9d58c05e787111464ae",
+    "target_commit": "77b40fd134d6e237e78ba0327d2c7605787c3981",
+    "error": null,
+    "stages": [
+      "draft",
+      "full-check",
+      "incremental-check",
+      "repair",
+      "recheck"
+    ]
+  },
+  "real_provenance": {
+    "source_job_id": "job-96b0363cee494ae882b706e3afccd337",
+    "source_trace_id": "trace-dee227fe6e8b4cd78a965b44392bfe93",
+    "source_kind": "incremental-check",
+    "source_sha256": "ee2612e4d8c08c38b6b3f2b82bb0d97b92c97db7b0443da0fe9bf448c01d448c"
+  },
+  "real_recheck": {
+    "commit": "77b40fd134d6e237e78ba0327d2c7605787c3981",
+    "status": "SUCCEEDED",
+    "accepted": true,
+    "checks": {
+      "patch_applies": true,
+      "build": true,
+      "test": true,
+      "header_change": true,
+      "no_missing": true
+    },
+    "findings": [
+      {
+        "type": "REDUNDANT",
+        "target": "main.o",
+        "dependency": "unused.h",
+        "evidence": [
+          {
+            "source": "make_database",
+            "artifact": "make-db.txt",
+            "line": 1052,
+            "declaration": "main.o: main.c unused.h config.h extra.h"
+          }
+        ],
+        "scope": "Not observed in this recipe job under this build configuration"
+      }
+    ]
+  },
+  "real_meta": {
+    "source_repo": "https://github.com/241880199/DevOps_Draft.git",
+    "source_commit": "71b40c434f522131ca97cae09f3360d970694180",
+    "source_fixture": "fixtures/draft, adapted to supported two-object profile",
+    "base_commit": "add734a17749506ad841c9d58c05e787111464ae",
+    "target_commit": "77b40fd134d6e237e78ba0327d2c7605787c3981",
+    "change": "C1 adds extra.h include and Dockerfile.broken",
+    "external_real_project": false,
+    "a_job_id": "job-96b0363cee494ae882b706e3afccd337",
+    "a_trace_id": "trace-dee227fe6e8b4cd78a965b44392bfe93",
+    "incremental_report_sha256": "ee2612e4d8c08c38b6b3f2b82bb0d97b92c97db7b0443da0fe9bf448c01d448c"
+  },
+  "api": {
+    "job": {
+      "schema_version": "e11e12-1",
+      "job_id": "job-e53da46e0bc84074ada436002fef0dab",
+      "status": "SUCCEEDED",
+      "idempotency_key": "e12-real-241880567-01",
+      "request_hash": "956cff6cb384a7e5d0e46d4917bdea12c62e8b9284e53c0aa4a1d0bbda520d83",
+      "trace_id": "trace-b66f1ef00b234025bf1f04e5192893bb"
+    },
+    "summary": {
+      "job_id": "job-e53da46e0bc84074ada436002fef0dab",
+      "status": "SUCCEEDED",
+      "checks": {
+        "candidate.patch": {
+          "manifest": "88074f66c291dcad1344c48f6a2b9ddd42d235d9d0415c85fb33310c5b7cb2af",
+          "body": "88074f66c291dcad1344c48f6a2b9ddd42d235d9d0415c85fb33310c5b7cb2af",
+          "header": "88074f66c291dcad1344c48f6a2b9ddd42d235d9d0415c85fb33310c5b7cb2af",
+          "match": true
+        },
+        "validation/validation.json": {
+          "manifest": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+          "body": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+          "header": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+          "match": true
+        }
+      }
+    },
+    "repeat_code": "202",
+    "conflict_code": "409",
+    "outside_code": "400",
+    "after_restart": {
+      "schema_version": "e11e12-1",
+      "job_id": "job-e53da46e0bc84074ada436002fef0dab",
+      "status": "SUCCEEDED",
+      "idempotency_key": "e12-real-241880567-01",
+      "request_hash": "956cff6cb384a7e5d0e46d4917bdea12c62e8b9284e53c0aa4a1d0bbda520d83",
+      "trace_id": "trace-b66f1ef00b234025bf1f04e5192893bb"
+    }
+  },
+  "tests": {
+    "log": "work/e12-tests-final-20261111-204504.log",
+    "ran": 21,
+    "status": "OK"
+  },
+  "images": {
+    "b": "sha256:e8e51fcbe1e7d0f8b55c9aaac9abdba95d3ac8e6113c5112bebce53f2d3d87aa",
+    "a": "sha256:01438cf93e370e8558ce1140a64ba1af2261dbbc581f12e148b8ce1cd8e5767b"
+  }
+}

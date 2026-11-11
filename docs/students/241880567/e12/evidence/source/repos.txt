@@ -1,0 +1,5 @@
+B_REPO=https://github.com/241880199/DevOps_Draft.git
+B_MAIN=71b40c434f522131ca97cae09f3360d970694180
+B_BRANCH=student/241880567/e12
+A_REPO=https://github.com/Ezio927/DevOps_BuildChecker.git
+A_MAIN=834521499b3d73c01d5b4305df24f1425d864d8e

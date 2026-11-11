@@ -1,0 +1,6 @@
+实验,数据来源,仓库,base_commit,target_commit,job_id,trace_id,报告路径,补丁路径,结果
+E12固定样例,course-generated,,9dd9332edf726cfbe351ba85c70a590952759b28,da75b85362ff04ebce89b2919eebc689edc06602,job-2eeae68d865a4a3a802eed050059d8ae,trace-f732929c20bd4ba68df2a007c5c13e46,evidence/fixed/,evidence/fixed/candidate.patch,通过
+A组EChecker输出,A组实际运行,https://github.com/Ezio927/DevOps_BuildChecker.git,95daee3e19278716f7564c754f854d1066ada8eb,871bcf9a31a4017727b2be9841564fd7de617580,job-a76de78f81e5461590eab01cd8c3c162,trace-a5656ab5adbb455a9f6c3e48c1318afe,evidence/a_source/,,
+B组消费A报告,B组实际运行,https://github.com/241880199/DevOps_Draft.git,95daee3e19278716f7564c754f854d1066ada8eb,871bcf9a31a4017727b2be9841564fd7de617580,job-ba1970826b434bba8ad7390fb25e00ac,trace-a5c2e90e6aee4091960b680c70b70eb9,evidence/cross/,evidence/cross/candidate.patch,通过
+真实Git项目,A组报告+B组DRAFT,https://github.com/241880199/DevOps_Draft.git,add734a17749506ad841c9d58c05e787111464ae,77b40fd134d6e237e78ba0327d2c7605787c3981,job-61e9d0fa19e54d3f81d927f9b60b2489,trace-268ebeaa46234bf2a811e4fd90a0afc7,evidence/real/,evidence/real/candidate.patch,通过
+API,E12真实请求,https://github.com/241880199/DevOps_Draft.git,add734a17749506ad841c9d58c05e787111464ae,77b40fd134d6e237e78ba0327d2c7605787c3981,job-e53da46e0bc84074ada436002fef0dab,trace-b66f1ef00b234025bf1f04e5192893bb,evidence/api/,evidence/api/candidate.patch,通过

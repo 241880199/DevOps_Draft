@@ -1,0 +1,16 @@
+nohup: ignoring input
+IMAGE=course-e11e12:241880567
+172.17.0.1 - - [11/Nov/2026 12:42:46] "GET /health HTTP/1.1" 200 -
+172.17.0.1 - - [11/Nov/2026 12:42:56] "POST /v1/jobs HTTP/1.1" 202 -
+172.17.0.1 - - [11/Nov/2026 12:42:57] "GET /v1/jobs/job-e53da46e0bc84074ada436002fef0dab HTTP/1.1" 200 -
+172.17.0.1 - - [11/Nov/2026 12:43:11] "POST /v1/jobs HTTP/1.1" 202 -
+172.17.0.1 - - [11/Nov/2026 12:43:11] "POST /v1/jobs HTTP/1.1" 409 -
+172.17.0.1 - - [11/Nov/2026 12:43:11] "POST /v1/jobs HTTP/1.1" 400 -
+172.17.0.1 - - [11/Nov/2026 12:43:25] "GET /v1/jobs/job-e53da46e0bc84074ada436002fef0dab HTTP/1.1" 200 -
+172.17.0.1 - - [11/Nov/2026 12:43:25] "GET /v1/jobs/job-e53da46e0bc84074ada436002fef0dab/artifacts HTTP/1.1" 200 -
+172.17.0.1 - - [11/Nov/2026 12:43:25] "GET /v1/jobs/job-e53da46e0bc84074ada436002fef0dab/files/candidate.patch HTTP/1.1" 200 -
+172.17.0.1 - - [11/Nov/2026 12:43:25] "GET /v1/jobs/job-e53da46e0bc84074ada436002fef0dab/files/validation/validation.json HTTP/1.1" 200 -
+172.17.0.1 - - [11/Nov/2026 12:43:58] "GET /health HTTP/1.1" 200 -
+172.17.0.1 - - [11/Nov/2026 12:43:58] "GET /v1/jobs/job-e53da46e0bc84074ada436002fef0dab HTTP/1.1" 200 -
+172.17.0.1 - - [11/Nov/2026 12:44:07] "GET /health HTTP/1.1" 200 -
+172.17.0.1 - - [11/Nov/2026 12:44:11] "GET /v1/jobs/job-e53da46e0bc84074ada436002fef0dab HTTP/1.1" 200 -
