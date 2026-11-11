@@ -1,16 +1,16 @@
 {
   "health": "ok",
-  "job_id": "job-b4a93ff199e847999472fdae73a124ee",
+  "job_id": "job-e7904b428e724f8fb4c309aeda885449",
   "submit_status": 202,
-  "trace_id": "trace-3dc189f1bede4a61bdfa915b7fa224d8",
+  "trace_id": "trace-cbe0525ac8244140bc2cb4734f06f77b",
   "same_key_same_job": true,
   "conflict_status": 409,
   "outside_data_status": 400,
   "final_status": "SUCCEEDED",
-  "artifact_count": 85,
+  "artifact_count": 96,
   "download_status": 200,
-  "download_header_sha256": "5e6627eb304abea9155fe5eedf6e5dea03001923545926682721a3a4f1d595ac",
-  "download_body_sha256": "5e6627eb304abea9155fe5eedf6e5dea03001923545926682721a3a4f1d595ac",
-  "listed_sha256": "5e6627eb304abea9155fe5eedf6e5dea03001923545926682721a3a4f1d595ac",
+  "download_header_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+  "download_body_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+  "listed_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
   "hash_matches": true
 }

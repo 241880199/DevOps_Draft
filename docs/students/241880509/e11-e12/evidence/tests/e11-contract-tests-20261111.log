@@ -9,13 +9,13 @@ test_reject_old_commit (test_contract.Contracts.test_reject_old_commit) ... ok
 test_reject_schema (test_contract.Contracts.test_reject_schema) ... ok
 test_reject_wrong_artifact_kind (test_contract.Contracts.test_reject_wrong_artifact_kind) ... ok
 test_same_key_same_request_same_job (test_contract.Contracts.test_same_key_same_request_same_job) ... ok
-test_body_only_commit_reuses_cached_targets (test_student.StudentE11.test_body_only_commit_reuses_cached_targets) ... ok
-test_include_commit_refreshes_both_targets (test_student.StudentE11.test_include_commit_refreshes_both_targets) ... ok
-test_macro_style_patch_edits_the_variable (test_student.StudentE11.test_macro_style_patch_edits_the_variable) ... ok
-test_mixed_style_patch_edits_the_rule (test_student.StudentE11.test_mixed_style_patch_edits_the_rule) ... ok
-test_stale_report_stops_patch (test_student.StudentE11.test_stale_report_stops_patch) ... ok
+test_fixed_md_envelope_requires_target_commit (test_student.StudentE11B.test_fixed_md_envelope_requires_target_commit) ... ok
+test_macro_style_patch_edits_the_variable (test_student.StudentE11B.test_macro_style_patch_edits_the_variable) ... ok
+test_mixed_style_patch_edits_the_rule (test_student.StudentE11B.test_mixed_style_patch_edits_the_rule) ... ok
+test_repair_adds_both_missing_and_keeps_redundant (test_student.StudentE11B.test_repair_adds_both_missing_and_keeps_redundant) ... ok
+test_stale_report_stops_patch (test_student.StudentE11B.test_stale_report_stops_patch) ... ok
 
 ----------------------------------------------------------------------
-Ran 15 tests in 0.254s
+Ran 15 tests in 0.204s
 
 OK

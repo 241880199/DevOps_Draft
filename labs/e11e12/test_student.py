@@ -1,11 +1,12 @@
-"""E11 personal tests: cache refresh/reuse and declaration-style patch placement."""
+"""E11 B-track personal tests: fixed MD repair and declaration-style placement."""
 import tempfile
 import unittest
 from pathlib import Path
+import pipeline
 from lab import fixture, commit, scan, patch
 
 
-class StudentE11(unittest.TestCase):
+class StudentE11B(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
@@ -14,27 +15,24 @@ class StudentE11(unittest.TestCase):
     def findings(self, report):
         return sorted((f['type'], f['target'], f['dependency']) for f in report['findings'])
 
-    def test_body_only_commit_reuses_cached_targets(self):
+    def test_repair_adds_both_missing_and_keeps_redundant(self):
         fixture(self.p)
-        baseline = scan(self.p)
-        (self.p / 'helper.c').write_text('int helper(void){return 0+0;}\n')
-        newer = commit(self.p, 'C1 helper body only')
-        report = scan(self.p, baseline)
-        self.assertEqual(report['commit'], newer)
-        self.assertEqual(report['reused'], ['main.o', 'helper.o'])
-        self.assertEqual(report['refreshed'], [])
-        self.assertEqual(self.findings(report), self.findings(baseline))
-
-    def test_include_commit_refreshes_both_targets(self):
-        fixture(self.p)
-        baseline = scan(self.p)
         (self.p / 'main.c').write_text('#include "extra.h"\n' + (self.p / 'main.c').read_text())
         commit(self.p, 'C1 project include')
-        report = scan(self.p, baseline)
-        self.assertEqual(report['refreshed'], ['main.o', 'helper.o'])
-        self.assertEqual(report['reused'], [])
-        self.assertIn(['MISSING', 'main.o', 'extra.h'], report['added'])
-        self.assertEqual(report['actual']['main.o'], ['config.h', 'extra.h', 'main.c'])
+        report = scan(self.p)
+        self.assertEqual(self.findings(report), [
+            ('MISSING', 'main.o', 'config.h'),
+            ('MISSING', 'main.o', 'extra.h'),
+            ('REDUNDANT', 'main.o', 'unused.h'),
+        ])
+        diff, edits = patch(self.p, report)
+        self.assertIn('+main.o: main.c unused.h config.h extra.h', diff)
+        self.assertEqual(edits, [
+            {'target': 'main.o', 'dependency': 'config.h', 'style': 'direct'},
+            {'target': 'main.o', 'dependency': 'extra.h', 'style': 'direct'},
+        ])
+        self.assertIn('unused.h', (self.p / 'Makefile').read_text())
+        self.assertNotIn('config.h', (self.p / 'Makefile').read_text())
 
     def test_macro_style_patch_edits_the_variable(self):
         fixture(self.p, 'macro')
@@ -59,6 +57,14 @@ class StudentE11(unittest.TestCase):
         report['commit'] = '0' * 40
         with self.assertRaisesRegex(ValueError, 'STALE_REPORT'):
             patch(self.p, report)
+
+    def test_fixed_md_envelope_requires_target_commit(self):
+        envelope = {'schema_version': 'e11e12-1', 'kind': 'fixed-md',
+                    'commit': 'a' * 40, 'status': 'SUCCEEDED'}
+        pipeline.check_envelope(envelope, 'a' * 40, 'fixed-md')
+        with self.assertRaises(pipeline.Failure) as ctx:
+            pipeline.check_envelope(envelope, 'b' * 40, 'fixed-md')
+        self.assertEqual(ctx.exception.code, 'STALE_REPORT')
 
 
 if __name__ == '__main__':

@@ -4,7 +4,7 @@
   "base": "948585fd9a7c9261694291b16d8f7c440719eb79",
   "target": "2fe9a507740301fafd379f2f3205de0974bc5cdf",
   "candidate": "/course/data/integration-sample/candidate.Dockerfile",
-  "fixed_report": "/course/work/autonomous-a/fixed-md-stale.json",
+  "fixed_report": "/course/work/e11-b-stale/fixed-md-stale.json",
   "expected_output": "1",
   "build_timeout": 600
 }

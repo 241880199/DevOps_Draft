@@ -1,205 +1,47 @@
 {
+  "track": "B",
   "environment": {
     "image": "course-e11e12:241880509",
     "image_id": "sha256:91c3d7dee370ed2ffaae45006e30e6f138d5249d694737bd631fee9f2d158376"
   },
-  "runs": {
-    "e11-a-01": {
-      "status": "SUCCEEDED",
-      "job_id": "job-e3f19aa81f8540fbaa4aeff0e6639c88",
-      "trace_id": "trace-c09b50c79156410baccf7b29e71d7bc4",
-      "base_commit": "948585fd9a7c9261694291b16d8f7c440719eb79",
-      "target_commit": "2fe9a507740301fafd379f2f3205de0974bc5cdf",
-      "stages": [
-        {
-          "name": "full-check",
-          "uri": "artifact://job-e3f19aa81f8540fbaa4aeff0e6639c88/full-check.json",
-          "sha256": "4dcadddb1dd37c3c2cf2dc35b6757e7abe95dbd8e89b2378b4e7d913ae51b4f0",
-          "bytes": 3631
-        },
-        {
-          "name": "incremental-check",
-          "uri": "artifact://job-e3f19aa81f8540fbaa4aeff0e6639c88/incremental-check.json",
-          "sha256": "9617d3cb39e34bbea3b6ba0a00ea2f336fc8f261931d802c012df4429b8fb55b",
-          "bytes": 2328
-        }
-      ],
-      "artifact_count": 85
-    },
-    "e11-b-01": {
-      "status": "SUCCEEDED",
-      "job_id": "job-f9f8caa936014d008d65143abe60a505",
-      "trace_id": "trace-1a5638c3ded341b79b603c98ea9a82e6",
-      "base_commit": "948585fd9a7c9261694291b16d8f7c440719eb79",
-      "target_commit": "2fe9a507740301fafd379f2f3205de0974bc5cdf",
-      "stages": [
-        {
-          "name": "draft",
-          "uri": "artifact://job-f9f8caa936014d008d65143abe60a505/draft.json",
-          "sha256": "6c7a17ee63828abbe4fc7102a84146ff0f74d03d191e16aee18c2f96c77cabf0",
-          "bytes": 3145
-        },
-        {
-          "name": "fixed-md",
-          "uri": "artifact://job-f9f8caa936014d008d65143abe60a505/fixed-md.json",
-          "sha256": "ff0dddcacf4493a4e0cce4ce8769882f2c0ce22f117606b94645c0b707d60c0a",
-          "bytes": 2256
-        },
-        {
-          "name": "repair",
-          "uri": "artifact://job-f9f8caa936014d008d65143abe60a505/repair.json",
-          "sha256": "4296381e05250ffeaa3d82ba48c640cb10533f0108af186d0988b8c192ab05fe",
-          "bytes": 1115
-        },
-        {
-          "name": "recheck",
-          "uri": "artifact://job-f9f8caa936014d008d65143abe60a505/recheck.json",
-          "sha256": "b14a6920a22fd423e609ca81048e2d61fa9c848f8cbb41add1322cd14ed6acab",
-          "bytes": 1529
-        }
-      ],
-      "artifact_count": 96
-    }
+  "run": {
+    "status": "SUCCEEDED",
+    "job_id": "job-f9f8caa936014d008d65143abe60a505",
+    "trace_id": "trace-1a5638c3ded341b79b603c98ea9a82e6",
+    "base_commit": "948585fd9a7c9261694291b16d8f7c440719eb79",
+    "target_commit": "2fe9a507740301fafd379f2f3205de0974bc5cdf",
+    "stages": [
+      {
+        "name": "draft",
+        "uri": "artifact://job-f9f8caa936014d008d65143abe60a505/draft.json",
+        "sha256": "6c7a17ee63828abbe4fc7102a84146ff0f74d03d191e16aee18c2f96c77cabf0",
+        "bytes": 3145
+      },
+      {
+        "name": "fixed-md",
+        "uri": "artifact://job-f9f8caa936014d008d65143abe60a505/fixed-md.json",
+        "sha256": "ff0dddcacf4493a4e0cce4ce8769882f2c0ce22f117606b94645c0b707d60c0a",
+        "bytes": 2256
+      },
+      {
+        "name": "repair",
+        "uri": "artifact://job-f9f8caa936014d008d65143abe60a505/repair.json",
+        "sha256": "4296381e05250ffeaa3d82ba48c640cb10533f0108af186d0988b8c192ab05fe",
+        "bytes": 1115
+      },
+      {
+        "name": "recheck",
+        "uri": "artifact://job-f9f8caa936014d008d65143abe60a505/recheck.json",
+        "sha256": "b14a6920a22fd423e609ca81048e2d61fa9c848f8cbb41add1322cd14ed6acab",
+        "bytes": 1529
+      }
+    ],
+    "artifact_count": 96
   },
-  "e11_a": {
-    "incremental_findings": [
-      {
-        "type": "MISSING",
-        "target": "main.o",
-        "dependency": "config.h"
-      },
-      {
-        "type": "MISSING",
-        "target": "main.o",
-        "dependency": "extra.h"
-      },
-      {
-        "type": "REDUNDANT",
-        "target": "main.o",
-        "dependency": "unused.h"
-      }
-    ],
-    "refreshed": [
-      "main.o",
-      "helper.o"
-    ],
-    "reused": [],
-    "added": [
-      [
-        "MISSING",
-        "main.o",
-        "extra.h"
-      ]
-    ],
-    "baseline_actual": {
-      "main.o": [
-        "config.h",
-        "main.c"
-      ],
-      "helper.o": [
-        "helper.c"
-      ]
-    },
-    "target_actual": {
-      "main.o": [
-        "config.h",
-        "extra.h",
-        "main.c"
-      ],
-      "helper.o": [
-        "helper.c"
-      ]
-    },
-    "full_findings": [
-      {
-        "type": "MISSING",
-        "target": "main.o",
-        "dependency": "config.h",
-        "evidence": [
-          {
-            "source": "system_call",
-            "trace_file": "t.51",
-            "line": 577,
-            "pid": 51,
-            "operation": "openat"
-          },
-          {
-            "source": "system_call",
-            "trace_file": "t.52",
-            "line": 23,
-            "pid": 52,
-            "operation": "openat"
-          }
-        ],
-        "declared_dependencies": [
-          "main.c",
-          "unused.h"
-        ]
-      },
-      {
-        "type": "MISSING",
-        "target": "main.o",
-        "dependency": "extra.h",
-        "evidence": [
-          {
-            "source": "system_call",
-            "trace_file": "t.51",
-            "line": 101,
-            "pid": 51,
-            "operation": "openat"
-          },
-          {
-            "source": "system_call",
-            "trace_file": "t.52",
-            "line": 23,
-            "pid": 52,
-            "operation": "openat"
-          }
-        ],
-        "declared_dependencies": [
-          "main.c",
-          "unused.h"
-        ]
-      },
-      {
-        "type": "REDUNDANT",
-        "target": "main.o",
-        "dependency": "unused.h",
-        "evidence": [
-          {
-            "source": "make_database",
-            "artifact": "make-db.txt",
-            "line": 1044,
-            "declaration": "main.o: main.c unused.h"
-          }
-        ],
-        "scope": "Not observed in this recipe job under this build configuration"
-      }
-    ],
-    "full_status": "SUCCEEDED",
-    "full_observed": [
-      "app",
-      "helper.o",
-      "main.o"
-    ],
-    "envelopes": {
-      "full-check": {
-        "schema_version": "e11e12-1",
-        "kind": "full-check",
-        "commit": "948585fd9a7c9261694291b16d8f7c440719eb79",
-        "status": "SUCCEEDED"
-      },
-      "incremental-check": {
-        "schema_version": "e11e12-1",
-        "kind": "incremental-check",
-        "commit": "2fe9a507740301fafd379f2f3205de0974bc5cdf",
-        "status": "SUCCEEDED"
-      }
-    }
-  },
-  "e11_b": {
-    "draft_status": "SUCCEEDED",
-    "draft_trace": "e6-b-91f18e40abe04f07a3c8c435ab0dcd35",
+  "draft": {
+    "status": "SUCCEEDED",
+    "trace_id": "e6-b-91f18e40abe04f07a3c8c435ab0dcd35",
+    "candidate_sha256": "771c7c4214a87026da1fe172ed95ff8292f3564b3af6eaf9f3b3f87f1042b9c9",
     "attempts": [
       {
         "iteration": 1,
@@ -235,21 +77,54 @@
       "expected_output": "1",
       "actual_output": "1\n",
       "output_matches": true
-    },
-    "validation": {
-      "accepted": true,
-      "checks": {
-        "patch_applies": true,
-        "build": true,
-        "test": true,
-        "header_change": true,
-        "no_missing": true
+    }
+  },
+  "fixed_md": {
+    "schema_version": "e11e12-1",
+    "kind": "fixed-md",
+    "commit": "2fe9a507740301fafd379f2f3205de0974bc5cdf",
+    "status": "SUCCEEDED"
+  },
+  "repair": {
+    "edits": [
+      {
+        "target": "main.o",
+        "dependency": "config.h",
+        "style": "direct"
       },
-      "error": null,
-      "source_unchanged": false,
-      "rollback": false
+      {
+        "target": "main.o",
+        "dependency": "extra.h",
+        "style": "direct"
+      }
+    ],
+    "input_report": {
+      "uri": "artifact://job-f9f8caa936014d008d65143abe60a505/fixed-md.json",
+      "sha256": "ff0dddcacf4493a4e0cce4ce8769882f2c0ce22f117606b94645c0b707d60c0a",
+      "bytes": 2256
+    }
+  },
+  "validation": {
+    "accepted": true,
+    "checks": {
+      "patch_applies": true,
+      "build": true,
+      "test": true,
+      "header_change": true,
+      "no_missing": true
     },
-    "recheck_findings": [
+    "error": null,
+    "source_unchanged": false,
+    "rollback": false
+  },
+  "recheck": {
+    "envelope": {
+      "schema_version": "e11e12-1",
+      "kind": "recheck",
+      "commit": "2fe9a507740301fafd379f2f3205de0974bc5cdf",
+      "status": "SUCCEEDED"
+    },
+    "findings": [
       {
         "type": "REDUNDANT",
         "target": "main.o",
@@ -264,37 +139,23 @@
         ],
         "scope": "Not observed in this recipe job under this build configuration"
       }
-    ],
-    "repair_data": {
-      "edits": [
-        {
-          "target": "main.o",
-          "dependency": "config.h",
-          "style": "direct"
-        },
-        {
-          "target": "main.o",
-          "dependency": "extra.h",
-          "style": "direct"
-        }
-      ],
-      "input_report": {
-        "uri": "artifact://job-f9f8caa936014d008d65143abe60a505/fixed-md.json",
-        "sha256": "ff0dddcacf4493a4e0cce4ce8769882f2c0ce22f117606b94645c0b707d60c0a",
-        "bytes": 2256
-      }
-    },
-    "fixed_md": {
-      "schema_version": "e11e12-1",
-      "kind": "fixed-md",
-      "commit": "2fe9a507740301fafd379f2f3205de0974bc5cdf",
-      "status": "SUCCEEDED"
-    },
-    "recheck_envelope": {
-      "schema_version": "e11e12-1",
-      "kind": "recheck",
-      "commit": "2fe9a507740301fafd379f2f3205de0974bc5cdf",
-      "status": "SUCCEEDED"
-    }
-  }
+    ]
+  },
+  "api": {
+    "health": "ok",
+    "job_id": "job-e7904b428e724f8fb4c309aeda885449",
+    "submit_status": 202,
+    "trace_id": "trace-cbe0525ac8244140bc2cb4734f06f77b",
+    "same_key_same_job": true,
+    "conflict_status": 409,
+    "outside_data_status": 400,
+    "final_status": "SUCCEEDED",
+    "artifact_count": 96,
+    "download_status": 200,
+    "download_header_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+    "download_body_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+    "listed_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+    "hash_matches": true
+  },
+  "tests": 15
 }
