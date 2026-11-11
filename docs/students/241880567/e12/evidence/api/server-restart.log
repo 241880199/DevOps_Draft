@@ -1,0 +1,4 @@
+nohup: ignoring input
+IMAGE=course-e11e12:241880567
+172.17.0.1 - - [11/Nov/2026 12:44:36] "GET /health HTTP/1.1" 200 -
+172.17.0.1 - - [11/Nov/2026 12:44:36] "GET /v1/jobs/job-e53da46e0bc84074ada436002fef0dab HTTP/1.1" 200 -

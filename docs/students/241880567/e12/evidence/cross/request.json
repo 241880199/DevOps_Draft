@@ -1,0 +1,11 @@
+{
+  "mode": "e12",
+  "repo": "/course/data/e12-a-handoff-v2/repo",
+  "base": "95daee3e19278716f7564c754f854d1066ada8eb",
+  "target": "871bcf9a31a4017727b2be9841564fd7de617580",
+  "candidate": "/course/data/e12-a-handoff-v2/candidate.Dockerfile",
+  "incremental_report": "/course/data/e12-a-handoff-v2/incremental-check.json",
+  "incremental_report_sha256": "8614db7dc282a0b2524452ffc6d7ebf3ea33accda7a6fc970d37791793aaa3e9",
+  "expected_output": "1",
+  "build_timeout": 600
+}

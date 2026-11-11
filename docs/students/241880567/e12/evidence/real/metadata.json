@@ -1,0 +1,12 @@
+{
+  "source_repo": "https://github.com/241880199/DevOps_Draft.git",
+  "source_commit": "71b40c434f522131ca97cae09f3360d970694180",
+  "source_fixture": "fixtures/draft, adapted to supported two-object profile",
+  "base_commit": "add734a17749506ad841c9d58c05e787111464ae",
+  "target_commit": "77b40fd134d6e237e78ba0327d2c7605787c3981",
+  "change": "C1 adds extra.h include and Dockerfile.broken",
+  "external_real_project": false,
+  "a_job_id": "job-96b0363cee494ae882b706e3afccd337",
+  "a_trace_id": "trace-dee227fe6e8b4cd78a965b44392bfe93",
+  "incremental_report_sha256": "ee2612e4d8c08c38b6b3f2b82bb0d97b92c97db7b0443da0fe9bf448c01d448c"
+}

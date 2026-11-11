@@ -1,0 +1,107 @@
+diff --git a/labs/e11e12/pipeline.py b/labs/e11e12/pipeline.py
+index 66315fb..a54babc 100644
+--- a/labs/e11e12/pipeline.py
++++ b/labs/e11e12/pipeline.py
+@@ -41,6 +41,18 @@ def load_artifact(path, expected_sha256):
+         raise Failure('ARTIFACT_HASH_MISMATCH','Artifact content changed during transfer')
+     return json.loads(data)
+ 
++def load_incremental_report(path, expected_sha256, commit):
++    if not isinstance(expected_sha256,str) or not re.fullmatch(r'[0-9a-fA-F]{64}',expected_sha256):
++        raise Failure('INVALID_REPORT_SHA','incremental_report_sha256 must be 64 hexadecimal characters')
++    report=load_artifact(Path(path),expected_sha256.lower())
++    check_envelope(report,commit,'incremental-check')
++    data=report.get('data')
++    if not isinstance(data,dict) or not isinstance(data.get('findings'),list):
++        raise Failure('INVALID_REPORT','Incremental report data.findings must be a list')
++    if data.get('commit')!=commit:
++        raise Failure('STALE_REPORT','Incremental report data belongs to another commit')
++    return report
++
+ def command(argv, cwd, log):
+     log.parent.mkdir(parents=True, exist_ok=True)
+     p = subprocess.run(argv, cwd=cwd, capture_output=True, text=True, timeout=120)
+@@ -77,10 +89,12 @@ def execute(request, out, job_id=None):
+     out.mkdir(parents=True, exist_ok=True)
+     result = {'schema_version':'e11e12-1','job_id':job_id,'trace_id':trace_id,'status':'RUNNING','stages':[]}
+     save(out/'request.json',request)
+-    def stage(name, commit, payload, files=()):
++    def stage(name, commit, payload, files=(), provenance=None):
+         envelope = {'schema_version':'e11e12-1','job_id':job_id,'trace_id':trace_id,'kind':name,
+                     'commit':commit,'status':'SUCCEEDED','data':payload,
+                     'artifacts':[artifact(p,out,job_id) for p in files]}
++        if provenance is not None:
++            envelope['provenance']=provenance
+         save(out/(name+'.json'),envelope)
+         result['stages'].append({'name':name,'artifact':artifact(out/(name+'.json'),out,job_id)})
+         return envelope
+@@ -113,12 +127,31 @@ def execute(request, out, job_id=None):
+             save(out/'baseline-cache.json',old)
+             baseline=stage('full-check',base_sha,base_full,[out/'baseline-full/actual-graph.json',out/'baseline-full/findings.json',out/'baseline-cache.json'])
+             check_envelope(baseline,base_sha,'full-check')
+-            current=scan(target,old)
+-            save(out/'incremental-report.json',current)
++            external=request.get('incremental_report')
++            if external:
++                source=Path(external).resolve()
++                data_root=(ROOT/'data').resolve()
++                if not source.is_relative_to(data_root):
++                    raise Failure('INVALID_REQUEST','incremental_report must be under /course/data')
++                external_report=load_incremental_report(source,request.get('incremental_report_sha256'),target_sha)
++                current=external_report['data']
++                save(out/'incremental-report.json',current)
++                (out/'external-incremental-check.json').write_bytes(source.read_bytes())
++            else:
++                current=scan(target,old)
++                save(out/'incremental-report.json',current)
+             reference=full(target,out/'target-full')
+             if normalized(reference['findings']) != normalized(current['findings']):
+                 raise Failure('FINDINGS_MISMATCH','Incremental/full object-target findings differ')
+-            md_envelope=stage('incremental-check',target_sha,current,[out/'incremental-report.json',out/'target-full/findings.json'])
++            input_files=[out/'incremental-report.json',out/'target-full/findings.json']
++            provenance=None
++            if external:
++                input_files.append(out/'external-incremental-check.json')
++                provenance={'source_job_id':external_report.get('job_id'),
++                            'source_trace_id':external_report.get('trace_id'),
++                            'source_kind':external_report.get('kind'),
++                            'source_sha256':request['incremental_report_sha256'].lower()}
++            md_envelope=stage('incremental-check',target_sha,current,input_files,provenance)
+         else:
+             # E11-B still consumes a fixed MD input, separately from A's live output.
+             fixed=Path(request['fixed_report'])
+diff --git a/labs/e11e12/prepare.py b/labs/e11e12/prepare.py
+index 66865a0..0be917f 100644
+--- a/labs/e11e12/prepare.py
++++ b/labs/e11e12/prepare.py
+@@ -16,7 +16,16 @@ def main():
+     (project/'main.c').write_text('#include "extra.h"\n'+(project/'main.c').read_text(),encoding='utf-8')
+     target=commit(project,'integration C1 add project include')
+     pin='FROM '+image+'@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f'
+-    candidate=broken.replace('FROM '+image,pin).replace('RUN make app','RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*\nRUN make app')
++    install=(
++        'RUN sed -i '
++        "-e 's|http://deb.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g' "
++        "-e 's|http://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g' "
++        "-e 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g' "
++        '/etc/apt/sources.list.d/debian.sources && '
++        'apt-get update && apt-get install -y --no-install-recommends build-essential '
++        '&& rm -rf /var/lib/apt/lists/*\nRUN make app'
++    )
++    candidate=broken.replace('FROM '+image,pin).replace('RUN make app',install)
+     (root/'candidate.Dockerfile').write_text(candidate,encoding='utf-8')
+     fixed=scan(project)
+     save(root/'fixed-md.json',{'schema_version':'e11e12-1','kind':'fixed-md','status':'SUCCEEDED','commit':target,'data':fixed})
+diff --git a/labs/e11e12/server.py b/labs/e11e12/server.py
+index a3f721c..8b09df6 100644
+--- a/labs/e11e12/server.py
++++ b/labs/e11e12/server.py
+@@ -26,7 +26,7 @@ class Store:
+         if not isinstance(request,dict):raise ValueError('input must be a JSON object')
+         if not isinstance(key,str) or not key or len(key)>128:raise ValueError('idempotency_key required, max 128 characters')
+         if request.get('mode') not in ('e11-a','e11-b','e12'):raise ValueError('Unknown mode')
+-        for field in ('repo','candidate','fixed_report'):
++        for field in ('repo','candidate','fixed_report','incremental_report'):
+             if field in request:
+                 path=Path(request[field]).resolve()
+                 if not path.is_relative_to((ROOT/'data').resolve()):raise ValueError(field+' must be under /course/data')

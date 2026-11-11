@@ -1,0 +1,27 @@
+IMAGE=course-e11e12:241880567
+test_accept_current_report (test_contract.Contracts.test_accept_current_report) ... ok
+test_api_rejects_repo_outside_data (test_contract.Contracts.test_api_rejects_repo_outside_data) ... ok
+test_artifact_uses_relative_uri_and_content_hash (test_contract.Contracts.test_artifact_uses_relative_uri_and_content_hash) ... ok
+test_changed_artifact_is_rejected (test_contract.Contracts.test_changed_artifact_is_rejected) ... ok
+test_existing_evidence_not_overwritten (test_contract.Contracts.test_existing_evidence_not_overwritten) ... ok
+test_reject_failed_upstream (test_contract.Contracts.test_reject_failed_upstream) ... ok
+test_reject_old_commit (test_contract.Contracts.test_reject_old_commit) ... ok
+test_reject_schema (test_contract.Contracts.test_reject_schema) ... ok
+test_reject_wrong_artifact_kind (test_contract.Contracts.test_reject_wrong_artifact_kind) ... ok
+test_same_key_same_request_same_job (test_contract.Contracts.test_same_key_same_request_same_job) ... ok
+test_api_accepts_external_report_only_under_data (test_e12_student.StudentE12.test_api_accepts_external_report_only_under_data) ... ok
+test_external_incremental_report_is_hash_and_commit_checked (test_e12_student.StudentE12.test_external_incremental_report_is_hash_and_commit_checked) ... ok
+test_external_report_hash_mismatch_is_rejected (test_e12_student.StudentE12.test_external_report_hash_mismatch_is_rejected) ... ok
+test_external_report_payload_commit_is_rejected (test_e12_student.StudentE12.test_external_report_payload_commit_is_rejected) ... ok
+test_external_report_requires_full_sha256 (test_e12_student.StudentE12.test_external_report_requires_full_sha256) ... ok
+test_external_report_wrong_kind_is_rejected (test_e12_student.StudentE12.test_external_report_wrong_kind_is_rejected) ... ok
+test_fixed_md_envelope_requires_target_commit (test_student.StudentE11B.test_fixed_md_envelope_requires_target_commit) ... ok
+test_macro_style_patch_edits_the_variable (test_student.StudentE11B.test_macro_style_patch_edits_the_variable) ... ok
+test_mixed_style_patch_edits_the_rule (test_student.StudentE11B.test_mixed_style_patch_edits_the_rule) ... ok
+test_repair_adds_both_missing_and_keeps_redundant (test_student.StudentE11B.test_repair_adds_both_missing_and_keeps_redundant) ... ok
+test_stale_report_stops_patch (test_student.StudentE11B.test_stale_report_stops_patch) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.099s
+
+OK

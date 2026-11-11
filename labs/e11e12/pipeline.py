@@ -41,6 +41,18 @@ def load_artifact(path, expected_sha256):
         raise Failure('ARTIFACT_HASH_MISMATCH','Artifact content changed during transfer')
     return json.loads(data)
 
+def load_incremental_report(path, expected_sha256, commit):
+    if not isinstance(expected_sha256,str) or not re.fullmatch(r'[0-9a-fA-F]{64}',expected_sha256):
+        raise Failure('INVALID_REPORT_SHA','incremental_report_sha256 must be 64 hexadecimal characters')
+    report=load_artifact(Path(path),expected_sha256.lower())
+    check_envelope(report,commit,'incremental-check')
+    data=report.get('data')
+    if not isinstance(data,dict) or not isinstance(data.get('findings'),list):
+        raise Failure('INVALID_REPORT','Incremental report data.findings must be a list')
+    if data.get('commit')!=commit:
+        raise Failure('STALE_REPORT','Incremental report data belongs to another commit')
+    return report
+
 def command(argv, cwd, log):
     log.parent.mkdir(parents=True, exist_ok=True)
     p = subprocess.run(argv, cwd=cwd, capture_output=True, text=True, timeout=120)
@@ -77,10 +89,12 @@ def execute(request, out, job_id=None):
     out.mkdir(parents=True, exist_ok=True)
     result = {'schema_version':'e11e12-1','job_id':job_id,'trace_id':trace_id,'status':'RUNNING','stages':[]}
     save(out/'request.json',request)
-    def stage(name, commit, payload, files=()):
+    def stage(name, commit, payload, files=(), provenance=None):
         envelope = {'schema_version':'e11e12-1','job_id':job_id,'trace_id':trace_id,'kind':name,
                     'commit':commit,'status':'SUCCEEDED','data':payload,
                     'artifacts':[artifact(p,out,job_id) for p in files]}
+        if provenance is not None:
+            envelope['provenance']=provenance
         save(out/(name+'.json'),envelope)
         result['stages'].append({'name':name,'artifact':artifact(out/(name+'.json'),out,job_id)})
         return envelope
@@ -113,12 +127,31 @@ def execute(request, out, job_id=None):
             save(out/'baseline-cache.json',old)
             baseline=stage('full-check',base_sha,base_full,[out/'baseline-full/actual-graph.json',out/'baseline-full/findings.json',out/'baseline-cache.json'])
             check_envelope(baseline,base_sha,'full-check')
-            current=scan(target,old)
-            save(out/'incremental-report.json',current)
+            external=request.get('incremental_report')
+            if external:
+                source=Path(external).resolve()
+                data_root=(ROOT/'data').resolve()
+                if not source.is_relative_to(data_root):
+                    raise Failure('INVALID_REQUEST','incremental_report must be under /course/data')
+                external_report=load_incremental_report(source,request.get('incremental_report_sha256'),target_sha)
+                current=external_report['data']
+                save(out/'incremental-report.json',current)
+                (out/'external-incremental-check.json').write_bytes(source.read_bytes())
+            else:
+                current=scan(target,old)
+                save(out/'incremental-report.json',current)
             reference=full(target,out/'target-full')
             if normalized(reference['findings']) != normalized(current['findings']):
                 raise Failure('FINDINGS_MISMATCH','Incremental/full object-target findings differ')
-            md_envelope=stage('incremental-check',target_sha,current,[out/'incremental-report.json',out/'target-full/findings.json'])
+            input_files=[out/'incremental-report.json',out/'target-full/findings.json']
+            provenance=None
+            if external:
+                input_files.append(out/'external-incremental-check.json')
+                provenance={'source_job_id':external_report.get('job_id'),
+                            'source_trace_id':external_report.get('trace_id'),
+                            'source_kind':external_report.get('kind'),
+                            'source_sha256':request['incremental_report_sha256'].lower()}
+            md_envelope=stage('incremental-check',target_sha,current,input_files,provenance)
         else:
             # E11-B still consumes a fixed MD input, separately from A's live output.
             fixed=Path(request['fixed_report'])
