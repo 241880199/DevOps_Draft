@@ -1,0 +1,69 @@
+IMAGE=course-e11e12:241880509
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  101.9kB
+Step 1/16 : ARG BASE_IMAGE=m.daocloud.io/docker.io/library/python:3.13-slim@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74
+Step 2/16 : ARG DOCKER_CLI_IMAGE=m.daocloud.io/docker.io/library/docker:28.5.1-cli@sha256:9190b0613792e658a7783cf14b2d5ace5941bb68ede7276922ea36ee457d76ad
+Step 3/16 : FROM ${DOCKER_CLI_IMAGE} AS docker-cli
+ ---> 9190b0613792
+Step 4/16 : FROM ${BASE_IMAGE}
+ ---> f82c96458eed
+Step 5/16 : ENV LC_ALL=C.UTF-8     TZ=UTC     PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1
+ ---> Using cache
+ ---> bc931e3ddf6c
+Step 6/16 : RUN sed -i       -e 's|https\?://deb.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g'       -e 's|https\?://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g'       -e 's|https\?://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g'       /etc/apt/sources.list.d/debian.sources  && apt-get -o Acquire::ForceIPv4=true -o Acquire::Retries=3 update  && apt-get -o Acquire::ForceIPv4=true -o Acquire::Retries=3 install -y --no-install-recommends gcc make libc6-dev strace git  && rm -rf /var/lib/apt/lists/*  && dpkg-query -W -f='${Package}=${Version}\n' gcc make libc6-dev strace git > /opt/toolchain.lock  && echo "python3=$(python3 -c 'import platform; print(platform.python_version())')" >> /opt/toolchain.lock  && echo "arch=$(dpkg --print-architecture)" >> /opt/toolchain.lock
+ ---> Using cache
+ ---> 82e6900bc3bc
+Step 7/16 : COPY requirements-dev.lock /tmp/requirements-dev.lock
+ ---> 75830e946dc3
+Step 8/16 : RUN python3 -m pip install       --index-url https://pypi.tuna.tsinghua.edu.cn/simple       --timeout 60 --retries 3       --no-cache-dir --require-hashes -r /tmp/requirements-dev.lock  && python3 -m pip freeze | sed 's/^/pip:/' >> /opt/toolchain.lock
+ ---> Running in ee6f2ac670e1
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Collecting iniconfig==2.3.0 (from -r /tmp/requirements-dev.lock (line 3))
+  Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Collecting packaging==26.3 (from -r /tmp/requirements-dev.lock (line 7))
+  Downloading packaging-26.3-py3-none-any.whl (129 kB)
+Collecting pluggy==1.6.0 (from -r /tmp/requirements-dev.lock (line 11))
+  Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Collecting pygments==2.21.0 (from -r /tmp/requirements-dev.lock (line 15))
+  Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 2.5 MB/s  0:00:00
+Collecting pytest==8.4.2 (from -r /tmp/requirements-dev.lock (line 19))
+  Downloading pytest-8.4.2-py3-none-any.whl (365 kB)
+Installing collected packages: pygments, pluggy, packaging, iniconfig, pytest
+
+Successfully installed iniconfig-2.3.0 packaging-26.3 pluggy-1.6.0 pygments-2.21.0 pytest-8.4.2
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[0m[91m
+[notice] A new release of pip is available: 26.1.2 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+[0m ---> Removed intermediate container ee6f2ac670e1
+ ---> 0698883ddd4e
+Step 9/16 : RUN useradd --create-home --uid 10001 app  && install -d -o app -g app /app
+ ---> Running in 0c23998002be
+ ---> Removed intermediate container 0c23998002be
+ ---> dc0d3ab67ab3
+Step 10/16 : WORKDIR /app
+ ---> Running in 91faec1c6837
+ ---> Removed intermediate container 91faec1c6837
+ ---> 274535fc6e00
+Step 11/16 : COPY --chown=app:app services/buildchecker/ /app/
+ ---> da83db240004
+Step 12/16 : COPY --chown=app:app fixtures/ /app/fixtures/
+ ---> 0905ef6d50c4
+Step 13/16 : COPY --from=docker-cli /usr/local/bin/docker /usr/local/bin/docker
+ ---> d27b17959a31
+Step 14/16 : COPY --from=docker-cli /usr/local/libexec/docker/cli-plugins/docker-buildx /usr/local/libexec/docker/cli-plugins/docker-buildx
+ ---> 42234bffac25
+Step 15/16 : USER app
+ ---> Running in c128aebadee9
+ ---> Removed intermediate container c128aebadee9
+ ---> 87a5af51c18d
+Step 16/16 : CMD ["python3", "-m", "buildchecker", "--help"]
+ ---> Running in f4baedbe1899
+ ---> Removed intermediate container f4baedbe1899
+ ---> 91c3d7dee370
+Successfully built 91c3d7dee370
+Successfully tagged course-e11e12:241880509

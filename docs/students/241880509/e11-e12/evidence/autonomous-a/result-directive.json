@@ -1,0 +1,7 @@
+{
+  "status": "SUCCEEDED",
+  "job_id": "job-abf7547800bb49fc8bc4ef2f532e0f52",
+  "trace_id": "trace-bf4ee8f6feef4ea1a9760694294aacaf",
+  "base_commit": "5d970022e31daa280f44ca79ea72be761625862c",
+  "target_commit": "0a12a1d833e003b530aeac78d5147ff44ee50c5f"
+}

@@ -1,0 +1,13 @@
+编号,轨道,阶段,项目,状态,证据路径或URL,说明
+E11-A01,A,E11,全量图接入历史缓存,PASS,evidence/e11-a-01/baseline-cache.json; evidence/e11-a-01/full-check.json,base 948585f 的真实 strace 图投影到 main.o/helper.o；full-check SUCCEEDED
+E11-A02,A,E11,目标增量与全量一致,PASS,evidence/e11-a-01/incremental-report.json; evidence/e11-a-01/target-full/findings.json,target 2fe9a50；MD config.h/extra.h、RD unused.h；三元组集合一致
+E11-B01,B,E11,DRAFT 两轮真实构建,PASS,evidence/e11-b-01/draft-build/result.json,iter-01 MISSING_MAKE exit 1；iter-02 exit 0；同镜像禁网运行输出 1
+E11-B02,B,E11,固定 MD→Patch→accepted→无 MD,PASS,evidence/e11-b-01/candidate.patch; evidence/e11-b-01/validation/validation.json; evidence/e11-b-01/recheck.json,五项检查全 true；重检仅 RD unused.h
+E11-X01,共同,E11,自主任务 A 刷新/复用,PASS,evidence/autonomous-a/,C1→C2 函数体 reused 两目标；C2→C3 指令 refreshed 两目标
+E11-X02,共同,E11,自主任务 B macro/mixed,PASS,labs/e11e12/test_student.py,补丁分别落在 DEPS 变量行与 main.o 规则行；测试通过
+E11-X03,共同,E11,篡改 commit 停止修复,PASS,evidence/stale-report/result.json,FAILED/STALE_REPORT；stages 只有 draft
+E11-T01,共同,E11,契约与个人测试,PASS,evidence/tests/e11-contract-tests-20261111.log,Ran 15 tests OK；原 10 + 新增 5
+E11-P01,共同,E11,HTTP API 联调,PASS,evidence/api/api-summary.json,202 受理、同键同 job、冲突 409、越界 400、下载 SHA256 一致
+E12,共同,E12,五阶段真实联调,PENDING,,未在本轮执行；E12 单独验收
+REAL,共同,验收,真实项目接入,PENDING,,需本组真实 C/Make 仓库与完整 base/target SHA
+GIT,共同,提交,分支/提交/PR/CI,PENDING,,按课程规则由本人执行；本轮未做 git 写操作
