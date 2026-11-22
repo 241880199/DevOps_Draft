@@ -1,0 +1,11 @@
+{
+  "mode": "e11-b",
+  "repo": "/course/data/e13-a-own-project",
+  "base": "e31c977a064cd593a34488e8b9ee0d1a57061fed",
+  "target": "93ef2b34b5645ac3578a7b3d34792d80441b4ac6",
+  "candidate": "/course/data/integration-sample/candidate.Dockerfile",
+  "fixed_report": "/course/data/e13-live-a-e13/fixed-md.json",
+  "expected_output": "1",
+  "build_timeout": 600,
+  "fixed_report_sha256": "60c8d752625d1d10d52e5ffee4dcdd1676a669e12484d45e17ee7aa5848347c7"
+}

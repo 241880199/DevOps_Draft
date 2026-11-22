@@ -53,6 +53,21 @@ def load_incremental_report(path, expected_sha256, commit):
         raise Failure('STALE_REPORT','Incremental report data belongs to another commit')
     return report
 
+def load_fixed_report(path, expected_sha256, commit):
+    if expected_sha256 is None:
+        envelope=json.loads(Path(path).read_text(encoding='utf-8'))
+    else:
+        if not isinstance(expected_sha256,str) or not re.fullmatch(r'[0-9a-fA-F]{64}',expected_sha256):
+            raise Failure('INVALID_REPORT_SHA','fixed_report_sha256 must be 64 hexadecimal characters')
+        envelope=load_artifact(Path(path),expected_sha256.lower())
+    check_envelope(envelope,commit,'fixed-md')
+    data=envelope.get('data')
+    if not isinstance(data,dict) or not isinstance(data.get('findings'),list):
+        raise Failure('INVALID_REPORT','Fixed report data.findings must be a list')
+    if data.get('commit')!=commit:
+        raise Failure('STALE_REPORT','Fixed report data commit mismatch')
+    return envelope
+
 def command(argv, cwd, log):
     log.parent.mkdir(parents=True, exist_ok=True)
     p = subprocess.run(argv, cwd=cwd, capture_output=True, text=True, timeout=120)
@@ -153,13 +168,10 @@ def execute(request, out, job_id=None):
                             'source_sha256':request['incremental_report_sha256'].lower()}
             md_envelope=stage('incremental-check',target_sha,current,input_files,provenance)
         else:
-            # E11-B still consumes a fixed MD input, separately from A's live output.
-            fixed=Path(request['fixed_report'])
-            envelope=json.loads(fixed.read_text(encoding='utf-8'))
-            check_envelope(envelope,target_sha,'fixed-md')
+            # E13-B consumes A's live report converted to a fixed-md envelope.
+            fixed=Path(request['fixed_report']).resolve()
+            envelope=load_fixed_report(fixed,request.get('fixed_report_sha256'),target_sha)
             current=envelope['data']
-            if current.get('commit') != target_sha:
-                raise Failure('STALE_REPORT','Fixed report data commit mismatch')
             save(out/'fixed-md-input.json',envelope)
             md_envelope=stage('fixed-md',target_sha,current,[out/'fixed-md-input.json'])
         if mode in ('e11-b','e12'):

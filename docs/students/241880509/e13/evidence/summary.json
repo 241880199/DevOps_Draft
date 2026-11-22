@@ -1,0 +1,266 @@
+{
+  "track": "B",
+  "stage": "E13",
+  "environment": {
+    "image": "course-e11e12:241880509",
+    "image_id": "sha256:91c3d7dee370ed2ffaae45006e30e6f138d5249d694737bd631fee9f2d158376"
+  },
+  "baseline": {
+    "status": "SUCCEEDED",
+    "job_id": "job-d3d68e73cf78485081871ffe862c8676"
+  },
+  "c1": {
+    "status": "SUCCEEDED",
+    "job_id": "job-02f85b97e87e4cc18fa953d12845bca7",
+    "trace_id": "trace-4cc4deea987943618958d7d110169ce2",
+    "base_commit": "add734a17749506ad841c9d58c05e787111464ae",
+    "target_commit": "77b40fd134d6e237e78ba0327d2c7605787c3981",
+    "stages": [
+      "draft",
+      "fixed-md",
+      "repair",
+      "recheck"
+    ],
+    "source_report": {
+      "job_id": "job-e6ed45e4cbc84fbdb4a4d6254b2eaadd",
+      "trace_id": "trace-43c75bf7533a40e99641aa5953d78b48",
+      "uri": "artifact://job-e6ed45e4cbc84fbdb4a4d6254b2eaadd/incremental-check.json",
+      "sha256": "3f66b60d848845836086884412abb38efb4046bbb70df97f70cb7ed4c9a14fb3"
+    },
+    "validation": {
+      "accepted": true,
+      "checks": {
+        "patch_applies": true,
+        "build": true,
+        "test": true,
+        "header_change": true,
+        "no_missing": true
+      },
+      "error": null,
+      "source_unchanged": false,
+      "rollback": false
+    },
+    "recheck": [
+      {
+        "type": "REDUNDANT",
+        "target": "main.o",
+        "dependency": "unused.h",
+        "evidence": [
+          {
+            "source": "make_database",
+            "artifact": "make-db.txt",
+            "line": 1052,
+            "declaration": "main.o: main.c unused.h config.h extra.h"
+          }
+        ],
+        "scope": "Not observed in this recipe job under this build configuration"
+      }
+    ]
+  },
+  "c2": {
+    "status": "FAILED",
+    "error": {
+      "code": "STALE_REPORT",
+      "message": "Report belongs to another commit"
+    },
+    "job_id": "job-4f32507b612343188fc03ed9c4527b7b",
+    "trace_id": "trace-2ae4cd93d28e4aaeb727d84dc0c3b38e",
+    "stages": [
+      "draft"
+    ],
+    "handoff_error": "A task belongs to another target commit"
+  },
+  "c3": {
+    "status": "FAILED",
+    "error": {
+      "code": "ARTIFACT_HASH_MISMATCH",
+      "message": "Artifact content changed during transfer"
+    },
+    "job_id": "job-b1eae9a4dbb647b38c17d3285eabf1e8",
+    "trace_id": "trace-d3a36ec205754593baa98c450c126663",
+    "stages": [
+      "draft"
+    ]
+  },
+  "c4": {
+    "status": "FAILED",
+    "error": {
+      "code": "DRAFT_FAILED",
+      "message": "Docker client command exceeded 0.01s"
+    },
+    "job_id": "job-6e0cb8a3d2b14ccbbeef3213e28f277b",
+    "trace_id": "trace-7530ae8e7ef74ebe855ca4f8e0c8aa0a",
+    "draft_status": "TIMED_OUT",
+    "draft_error": "Docker client command exceeded 0.01s"
+  },
+  "c7": {
+    "failed_status": "FAILED",
+    "failed_error": {
+      "code": "COMMAND_FAILED",
+      "message": "git failed; see base-project-resolve.log"
+    },
+    "failed_job_id": "job-26860188b85a4e5eac4b7510dec7e4bb",
+    "failed_trace_id": "trace-d574d871f9e041ceb12700b2982d3d86",
+    "good_job_id": "job-02f85b97e87e4cc18fa953d12845bca7",
+    "good_trace_id": "trace-4cc4deea987943618958d7d110169ce2",
+    "isolation": "PASS"
+  },
+  "c8": {
+    "health": "ok",
+    "job_id": "job-3974276fb6354a3296005a28a7f4ba5f",
+    "submit_status": 202,
+    "trace_id": "trace-ce7a21db78a14ac9bb50c843a61ffd12",
+    "same_key_same_job": true,
+    "conflict_status": 409,
+    "outside_data_status": 400,
+    "final_status": "SUCCEEDED",
+    "artifact_count": 95,
+    "download_status": 200,
+    "download_header_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+    "download_body_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+    "listed_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+    "hash_matches": true
+  },
+  "h1": {
+    "status": "SUCCEEDED",
+    "job_id": "job-26db9f3321d04c1f9283a47e1d737d1b",
+    "trace_id": "trace-0b1a640400ce456a91dbbc9130b467c4",
+    "target_commit": "948a1d30cd758d32d45a50f788e5a95fb1d89c69"
+  },
+  "h2": {
+    "status": "SUCCEEDED",
+    "job_id": "job-99c28795d3f74b6b839848ea7c1d1dfc",
+    "trace_id": "trace-a1b5bcf1015348328d1bb7bd95bea99e",
+    "target_commit": "3aadb81763c79651e4dfa99b725ba921ee2b8a39"
+  },
+  "h3": {
+    "status": "SUCCEEDED",
+    "job_id": "job-bd3cfea601404351887229e8315a323e",
+    "trace_id": "trace-e81e0e462a6848428d02e3b5207e7ff8",
+    "target_commit": "5640bb69a01e64559207e9f74d15a9ae71a4d0f3"
+  },
+  "tests": {
+    "e11e12": 21,
+    "e13e14": 7
+  },
+  "four_services_precheck": {
+    "status": "SUCCEEDED",
+    "job_id": "job-2cefa6521a1849aa9cfe51b7ea680382",
+    "trace_id": "trace-4418e843b72342de9487643fbc80911f",
+    "stages": [
+      "draft",
+      "full-check",
+      "incremental-check",
+      "repair",
+      "recheck"
+    ],
+    "artifact_count": 162,
+    "scan": "text_files=152 hits=0 errors=0",
+    "note": "local CI precheck only; remote Actions pending"
+  },
+  "c1_fresh": {
+    "status": "SUCCEEDED",
+    "job_id": "job-02f85b97e87e4cc18fa953d12845bca7",
+    "trace_id": "trace-4cc4deea987943618958d7d110169ce2",
+    "base_commit": "add734a17749506ad841c9d58c05e787111464ae",
+    "target_commit": "77b40fd134d6e237e78ba0327d2c7605787c3981",
+    "stages": [
+      "draft",
+      "fixed-md",
+      "repair",
+      "recheck"
+    ],
+    "source_report": {
+      "job_id": "job-e6ed45e4cbc84fbdb4a4d6254b2eaadd",
+      "trace_id": "trace-43c75bf7533a40e99641aa5953d78b48",
+      "uri": "artifact://job-e6ed45e4cbc84fbdb4a4d6254b2eaadd/incremental-check.json",
+      "sha256": "3f66b60d848845836086884412abb38efb4046bbb70df97f70cb7ed4c9a14fb3"
+    },
+    "validation": {
+      "accepted": true,
+      "checks": {
+        "patch_applies": true,
+        "build": true,
+        "test": true,
+        "header_change": true,
+        "no_missing": true
+      },
+      "error": null,
+      "source_unchanged": false,
+      "rollback": false
+    },
+    "recheck": [
+      {
+        "type": "REDUNDANT",
+        "target": "main.o",
+        "dependency": "unused.h",
+        "evidence": [
+          {
+            "source": "make_database",
+            "artifact": "make-db.txt",
+            "line": 1052,
+            "declaration": "main.o: main.c unused.h config.h extra.h"
+          }
+        ],
+        "scope": "Not observed in this recipe job under this build configuration"
+      }
+    ]
+  },
+  "c1prime": {
+    "status": "SUCCEEDED",
+    "job_id": "job-9d8de9c7c7fe486b9074597173cd8076",
+    "trace_id": "trace-7890b05f05cc46f8b06e9f5d2ef58419",
+    "base_commit": "e31c977a064cd593a34488e8b9ee0d1a57061fed",
+    "target_commit": "93ef2b34b5645ac3578a7b3d34792d80441b4ac6",
+    "stages": [
+      "draft",
+      "fixed-md",
+      "repair",
+      "recheck"
+    ],
+    "source_report": {
+      "job_id": "job-84674fd1a52f46b9b34f609bb576c47a",
+      "trace_id": "trace-e215e2037ce14d05912d6287e5de7446",
+      "uri": "artifact://job-84674fd1a52f46b9b34f609bb576c47a/incremental-check.json",
+      "sha256": "c574b1d5e1e921ed01d01af3f2d039922b1ac5de307de56e0b63d5948fc44d2c"
+    },
+    "validation": {
+      "accepted": true,
+      "checks": {
+        "patch_applies": true,
+        "build": true,
+        "test": true,
+        "header_change": true,
+        "no_missing": true
+      },
+      "error": null,
+      "source_unchanged": false,
+      "rollback": false
+    },
+    "recheck": [
+      {
+        "type": "REDUNDANT",
+        "target": "main.o",
+        "dependency": "unused.h",
+        "evidence": [
+          {
+            "source": "make_database",
+            "artifact": "make-db.txt",
+            "line": 1052,
+            "declaration": "main.o: main.c unused.h config.h"
+          }
+        ],
+        "scope": "Not observed in this recipe job under this build configuration"
+      }
+    ]
+  },
+  "c1_blocked": false,
+  "c5_pair": {
+    "accepted": false,
+    "rollback": true,
+    "source_unchanged": true,
+    "before": "9206301c23ce4cb93c3fc1434037e475cf69f53e132dc541f6028d05e30258b2",
+    "after": "9206301c23ce4cb93c3fc1434037e475cf69f53e132dc541f6028d05e30258b2",
+    "error": "COMMAND_FAILED ['git', 'apply', '--check', '/mnt/c/Users/godfly/Desktop/2026秋/课程/选修/devops/exp7/group-repo/work/e13-c5/broken.patch']\nerror: No valid patches in input (allow with \"--allow-empty\")\n"
+  }
+}

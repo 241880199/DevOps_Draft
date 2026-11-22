@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/godfly/Desktop/2026秋/课程/选修/devops/exp7/group-repo/labs/e13e14/handoff_a_to_b.py", line 100, in <module>
+    main()
+  File "/mnt/c/Users/godfly/Desktop/2026秋/课程/选修/devops/exp7/group-repo/labs/e13e14/handoff_a_to_b.py", line 93, in main
+    report = make_handoff(args.a_result, args.target_sha)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/godfly/Desktop/2026秋/课程/选修/devops/exp7/group-repo/labs/e13e14/handoff_a_to_b.py", line 48, in make_handoff
+    raise ValueError("A task belongs to another target commit")
+ValueError: A task belongs to another target commit

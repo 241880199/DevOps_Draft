@@ -1,0 +1,4 @@
+reject-test accepted=False rollback=True source_unchanged=True error=None
+reject-patch accepted=False rollback=True source_unchanged=True error=COMMAND_FAILED ['git', 'apply', '--check', '/course/work/e10-B-manual.tz03UM/broken.patch']
+error: No valid patches in input (allow with "--allow-empty")
+

@@ -1,0 +1,18 @@
+编号,轨道,阶段,项目,状态,证据路径或URL,说明
+C1,B,E13,A→B 当次报告交接（B 项目）,PASS,evidence/c1_fresh/,A 报告 job-e6ed45e4…（A 代码隔离复现）；handoff fa70153d…；B job-02f85b97…；accepted=true
+C1p,B,E13,A 自有 E13 项目,PASS,evidence/c1prime/,A 报告 job-84674fd1…；handoff 60c8d752…；B job-9d8de9c7…；accepted=true
+C2,B,E13,旧报告/错误目标,PASS,evidence/c2_old_report/,handoff another target；B FAILED/STALE_REPORT job-4f32507b…；stages 仅 draft
+C3,B,E13,产物内容变化,PASS,evidence/c3_tampered/,FAILED/ARTIFACT_HASH_MISMATCH job-b1eae9a4…；原 SHA 不变
+C4,B,E13,超时/卡住构建,PASS,evidence/c4_timeout/,内层 TIMED_OUT；外层 FAILED/DRAFT_FAILED；无 verify 容器
+C5,B,E13,错误补丁回滚,PASS,evidence/c5_pair/,A 项目 invalid patch：accepted=false、rollback=true、source_unchanged=true；前后 SHA 相同
+C6,B,E13,假 Key 扫描,PASS,evidence/c6_secret/,HIT=1、CLEAN=0；证据 867 文件 0；--history 0；--image 0
+C7,B,E13,失败任务隔离,PASS,evidence/c7_isolation/,失败 job-26860… 与成功 job-02f85b97… 不同；成功 95 产物自校验
+C8,B,E13,幂等冲突/API,PASS,evidence/c8_api/,202 job-3974276f…；409；400；下载三处 SHA256 一致
+H1,B,E13,jsmn,PASS,evidence/h1_jsmn/,SUCCEEDED；MD helper.o←extra.h；accepted=true
+H2,B,E13,inih,PASS,evidence/h2_inih/,SUCCEEDED；MD main.o←extra.h；保留 RD unused.h
+H3,B,E13,tiny-AES-c,PASS,evidence/h3_tiny_aes/,SUCCEEDED；MD helper.o←extra.h；accepted=true
+CI-PRE,B,E13,四容器本地预检,PASS,evidence/ci_four_services/,四服务 healthy；五阶段 SUCCEEDED；162 产物；日志 0 命中
+CI,B,E13,远端必需检查（f552424）,PASS,https://github.com/241880199/DevOps_Draft/actions/runs/45018886493,contracts/e7/e8e10/e11e12/four-services 全 success；新证据提交后需重跑
+SIGN,B,E13,A 组员签收,PENDING,,C1/C1′ 由 B 用 A 代码隔离复现，需 A 确认
+PR,B,提交,PR #13 合并,PENDING,https://github.com/241880199/DevOps_Draft/pull/13,合并后满足 E14 入口
+E14,B,E14,四服务与 RC,PENDING,,E13 门禁合并后开始

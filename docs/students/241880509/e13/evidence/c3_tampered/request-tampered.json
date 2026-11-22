@@ -1,0 +1,11 @@
+{
+  "mode": "e11-b",
+  "repo": "/course/data/e13-b-project",
+  "base": "add734a17749506ad841c9d58c05e787111464ae",
+  "target": "77b40fd134d6e237e78ba0327d2c7605787c3981",
+  "candidate": "/course/data/e13-b-candidate.Dockerfile",
+  "fixed_report": "/course/data/e13-live-b-e13/fixed-md-tampered-e13.json",
+  "expected_output": "1",
+  "build_timeout": 600,
+  "fixed_report_sha256": "fa70153d5b66485eca5ae856b905a0f1ab53f30f235ac4a3ee8c45094eabdc40"
+}

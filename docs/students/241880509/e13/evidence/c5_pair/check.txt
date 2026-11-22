@@ -1,0 +1,5 @@
+accepted=False rollback=True source_unchanged=True error=COMMAND_FAILED ['git', 'apply', '--check', '/mnt/c/Users/godfly/Desktop/2026秋/课程/选修/devops/exp7/group-repo/work/e13-c5/broken.patch']
+error: No valid patches in input (allow with "--allow-empty")
+
+before=9206301c23ce4cb93c3fc1434037e475cf69f53e132dc541f6028d05e30258b2
+after=9206301c23ce4cb93c3fc1434037e475cf69f53e132dc541f6028d05e30258b2

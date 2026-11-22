@@ -1,0 +1,35 @@
+GET /health -> 200
+POST /v1/jobs -> 202
+POST /v1/jobs -> 202
+POST /v1/jobs -> 409
+POST /v1/jobs -> 400
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f/artifacts -> 200
+GET /v1/jobs/job-3974276fb6354a3296005a28a7f4ba5f/files/validation/validation.json -> 200
+{
+  "health": "ok",
+  "job_id": "job-3974276fb6354a3296005a28a7f4ba5f",
+  "submit_status": 202,
+  "trace_id": "trace-ce7a21db78a14ac9bb50c843a61ffd12",
+  "same_key_same_job": true,
+  "conflict_status": 409,
+  "outside_data_status": 400,
+  "final_status": "SUCCEEDED",
+  "artifact_count": 95,
+  "download_status": 200,
+  "download_header_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+  "download_body_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+  "listed_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+  "hash_matches": true
+}

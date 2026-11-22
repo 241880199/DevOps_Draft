@@ -1,0 +1,143 @@
+{
+  "student_id": "241880444",
+  "status": "PASSED",
+  "mode": "E11-A_ONLY",
+  "time_utc": "2026-11-11T12:36:43.143271+00:00",
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "scripts/doctor.py",
+        "--out",
+        "/root/241880567/buildchecker/work/e12-a-controlled-20261111-203643/env.json"
+      ],
+      "cwd": "/root/241880567/buildchecker",
+      "time_utc": "2026-11-11T12:36:43.150719+00:00",
+      "exit_code": 0,
+      "elapsed_s": 0.5644104160019197,
+      "passed": true
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "run_e11e12.py",
+        "build",
+        "--a-only"
+      ],
+      "cwd": "/root/241880567/buildchecker",
+      "time_utc": "2026-11-11T12:36:43.715396+00:00",
+      "exit_code": 0,
+      "elapsed_s": 0.3140351769980043,
+      "passed": true
+    },
+    {
+      "argv": [
+        "docker",
+        "image",
+        "inspect",
+        "course-e11a:241880444"
+      ],
+      "cwd": "/root/241880567/buildchecker",
+      "time_utc": "2026-11-11T12:36:44.029680+00:00",
+      "exit_code": 0,
+      "elapsed_s": 0.03164752898737788,
+      "passed": true
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "course-e11a:241880444",
+        "cat",
+        "/opt/toolchain.lock"
+      ],
+      "cwd": "/root/241880567/buildchecker",
+      "time_utc": "2026-11-11T12:36:44.061594+00:00",
+      "exit_code": 0,
+      "elapsed_s": 0.1637465879903175,
+      "passed": true
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "run_e11e12.py",
+        "test",
+        "--a-only"
+      ],
+      "cwd": "/root/241880567/buildchecker",
+      "time_utc": "2026-11-11T12:36:44.225551+00:00",
+      "exit_code": 0,
+      "elapsed_s": 0.41465124301612377,
+      "passed": true
+    },
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--cpus",
+        "2",
+        "--memory",
+        "1g",
+        "--pids-limit",
+        "256",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--cap-add",
+        "SYS_PTRACE",
+        "--user",
+        "0:0",
+        "-e",
+        "HOME=/tmp",
+        "-e",
+        "PYTHONPATH=/course/labs/e11e12:/course/labs/e8e10:/app",
+        "-v",
+        "/root/241880567/buildchecker:/course",
+        "-w",
+        "/course",
+        "course-e11a:241880444",
+        "python3",
+        "labs/e11e12/student_241880444_a.py",
+        "--out",
+        "/course/work/e12-a-controlled-20261111-203643/experiment",
+        "--image-id",
+        "sha256:01438cf93e370e8558ce1140a64ba1af2261dbbc581f12e148b8ce1cd8e5767b"
+      ],
+      "cwd": "/root/241880567/buildchecker",
+      "time_utc": "2026-11-11T12:36:44.640625+00:00",
+      "exit_code": 0,
+      "elapsed_s": 1.265717622009106,
+      "passed": true
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "scripts/secret_scan.py",
+        ".",
+        "--history",
+        "--image",
+        "course-e11a:241880444"
+      ],
+      "cwd": "/root/241880567/buildchecker",
+      "time_utc": "2026-11-11T12:36:45.906664+00:00",
+      "exit_code": 0,
+      "elapsed_s": 0.31401176302460954,
+      "passed": true
+    }
+  ],
+  "provenance": "EXECUTION",
+  "source_sha": "834521499b3d73c01d5b4305df24f1425d864d8e",
+  "working_tree": "",
+  "image_id": "sha256:01438cf93e370e8558ce1140a64ba1af2261dbbc581f12e148b8ce1cd8e5767b",
+  "unit_tests": 8,
+  "real_integration_cases": 3,
+  "stale_report_rejected": true,
+  "e11_b_executed": false,
+  "e12_executed": false,
+  "api_started": false
+}

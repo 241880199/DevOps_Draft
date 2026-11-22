@@ -1,0 +1,7 @@
+PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+NAME="Debian GNU/Linux"
+gcc (Debian 14.2.0-19) 14.2.0
+GNU Make 4.4.1
+git version 2.47.3
+strace -- version 6.13
+Python 3.13.14
