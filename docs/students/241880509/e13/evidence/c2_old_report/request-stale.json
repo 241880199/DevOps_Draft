@@ -1,11 +1,11 @@
 {
   "mode": "e11-b",
-  "repo": "/course/data/e13-a-project",
+  "repo": "/course/data/e13-b-project",
   "base": "add734a17749506ad841c9d58c05e787111464ae",
   "target": "77b40fd134d6e237e78ba0327d2c7605787c3981",
-  "candidate": "/course/data/e13-a-candidate.Dockerfile",
-  "fixed_report": "/course/data/e13-live-report-from-A/fixed-md-stale.json",
+  "candidate": "/course/data/e13-b-candidate.Dockerfile",
+  "fixed_report": "/course/data/e13-live-b-e13/fixed-md-stale-e13.json",
   "expected_output": "1",
   "build_timeout": 600,
-  "fixed_report_sha256": "f63a1c52112824578eb7ff055fb0692f2e305cf8fd6ff1843f0ab64408b2c07d"
+  "fixed_report_sha256": "adbeea7bf282eac54ce45547f6ee4e2a8ae8897107fa1569116178c67084f105"
 }

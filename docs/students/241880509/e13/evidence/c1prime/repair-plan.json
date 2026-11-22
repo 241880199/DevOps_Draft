@@ -1,0 +1,17 @@
+[
+  {
+    "target": "main.o",
+    "dependency": "config.h",
+    "style": "direct"
+  },
+  {
+    "target": "helper.o",
+    "dependency": "config.h",
+    "style": "direct"
+  },
+  {
+    "target": "helper.o",
+    "dependency": "extra.h",
+    "style": "direct"
+  }
+]
