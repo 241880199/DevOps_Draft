@@ -1,0 +1,16 @@
+E13 archived-evidence recheck; audited commit 081924d; date 2026-11-22
+c1_fresh PASS job=job-02f85b97e87e4cc18fa953d12845bca7 stages=['draft', 'fixed-md', 'repair', 'recheck'] source=job-e6ed45e4cbc84fbdb4a4d6254b2eaadd accepted=True
+c1prime PASS job=job-9d8de9c7c7fe486b9074597173cd8076 stages=['draft', 'fixed-md', 'repair', 'recheck'] source=job-84674fd1a52f46b9b34f609bb576c47a accepted=True
+c2_old_report PASS job-4f32507b612343188fc03ed9c4527b7b STALE_REPORT
+c3_tampered PASS job-b1eae9a4dbb647b38c17d3285eabf1e8 ARTIFACT_HASH_MISMATCH distinct_sha= 2
+c4_timeout PASS job-6e0cb8a3d2b14ccbbeef3213e28f277b outer= DRAFT_FAILED inner= TIMED_OUT
+c5_pair PASS accepted=False rollback=True source_unchanged=True before==after= 9206301c23ce4cb93c3fc1434037e475cf69f53e132dc541f6028d05e30258b2
+c6_secret PASS hit>0 clean/runtime hits=0 probe_sha_changed=True
+c7_isolation PASS job-26860188b85a4e5eac4b7510dec7e4bb != job-02f85b97e87e4cc18fa953d12845bca7 C7_ISOLATION=PASS artifacts=95
+c8_api PASS job= job-3974276fb6354a3296005a28a7f4ba5f 202/same-job/409/400/hash_matches
+h1_jsmn PASS job-26db9f3321d04c1f9283a47e1d737d1b accepted=True
+h2_inih PASS job-99c28795d3f74b6b839848ea7c1d1dfc accepted=True
+h3_tiny_aes PASS job-bd3cfea601404351887229e8315a323e accepted=True
+ci_four_services PASS job-2cefa6521a1849aa9cfe51b7ea680382 artifacts=162 runtime log scan: text_files=152 hits=0 errors=0
+tests PASS Ran 21 tests in 0.148s Ran 7 tests in 0.011s
+E13_RECHECK=PASS
