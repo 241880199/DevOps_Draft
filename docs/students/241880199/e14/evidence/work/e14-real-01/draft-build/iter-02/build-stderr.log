@@ -1,0 +1,43 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 713B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for m.daocloud.io/docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM m.daocloud.io/docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+#4 resolve m.daocloud.io/docker.io/library/python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 163B done
+#5 DONE 0.0s
+
+#6 [2/5] WORKDIR /work
+#6 CACHED
+
+#7 [4/5] RUN sed -i -e 's|http://deb.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g' -e 's|http://security.debian.org/debian-security|https://mirrors.tuna.tsinghua.edu.cn/debian-security|g' -e 's|http://deb.debian.org/debian|https://mirrors.tuna.tsinghua.edu.cn/debian|g' /etc/apt/sources.list.d/debian.sources && apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [3/5] COPY main.c helper.c config.h extra.h unused.h Makefile ./
+#8 CACHED
+
+#9 [5/5] RUN make app
+#9 CACHED
+
+#10 exporting to image
+#10 exporting layers done
+#10 exporting manifest sha256:98ada4e5ec0092280eaaced8c094f64779e83f3d0a7b9d3c1d14d07b73f90cd9 done
+#10 exporting config sha256:e0acbcf65c9828cd8fcec84684bbf153a39b5d713cdf517a812f1c05703a4bf5 done
+#10 exporting attestation manifest sha256:1561074c21debd61641eeb70e47cfee5ab7759d9e72fab8d964b1469d4891ba6 0.0s done
+#10 exporting manifest list sha256:129581040cf6797fce3e5b128e4956ee19998c5c2a763d5427a84e966f015cfc done
+#10 naming to docker.io/library/e6-draft-replay:e05962d0379f49ac8247cf19675a095f-2
+#10 naming to docker.io/library/e6-draft-replay:e05962d0379f49ac8247cf19675a095f-2 done
+#10 unpacking to docker.io/library/e6-draft-replay:e05962d0379f49ac8247cf19675a095f-2 done
+#10 DONE 0.1s

@@ -1,0 +1,10 @@
+{
+  "mode": "e12",
+  "repo": "/course/data/integration-sample/repo",
+  "base": "f5e675c5c8c91a6e2853f6a50b026b06d23c72b6",
+  "target": "0046952855503bcaf639cfafcc850644bfdcd9ec",
+  "candidate": "/course/data/integration-sample/candidate.Dockerfile",
+  "fixed_report": "/course/data/integration-sample/fixed-md.json",
+  "expected_output": "1",
+  "build_timeout": 0.01
+}

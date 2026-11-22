@@ -6,9 +6,9 @@
 
 | 项 | 状态 | 说明 |
 |---|---|---|
-| C1′ A 自有 E13 项目报告缺失 | 输入阻断，未开 Issue | A 分支发布 `a-project.bundle` 和 `job-8e9c093f...` 摘要，但没有该 job 的 `result.json`、`incremental-check.json` 及 artifact 文件；handoff 无法核验。需要 A 组补交原始报告，不是 B 代码缺陷。 |
-| 远端 CI 未运行 | 待完成 | `e13e14.yml` 已导入；本地契约测试与四容器预检通过，但未 push/PR；不能把本地测试写成远端 CI 通过。 |
-| C5 配对项目错误补丁 | 待补 | 当前使用 E10 B 的 `reject-test`/`reject-patch` 作为前期回归；需要在配对项目上重新注入并保存前后完整 SHA。 |
+| C1′ A 自有 E13 项目报告缺失 | 输入阻断，已闭环（A 签收待补） | A 分支最初只发布 `a-project.bundle` 和 job 摘要，没有原始报告；B 随后用 A 提供的代码在隔离容器重新生成 `job-84674fd1...` 并完成 handoff/修复。不是 B 代码缺陷；A 组员独立签收仍待补。 |
+| 远端 CI 未运行 | 已完成 | `081924d` 上 `contracts`、`e7-b-quality-gate`、`e8e10-quality-gate`、`e11e12-integration`、`four-services` 全部 success（run `45022754030`）；E13 已通过 PR #14 合并（`ecc5d08`）。 |
+| C5 配对项目错误补丁 | 已完成 | 在 A 项目隔离副本注入 `invalid patch`：`accepted=false`、`rollback=true`、`source_unchanged=true`，前后 Makefile SHA 相同；证据在 `evidence/c5_pair/`。 |
 
 ## PR
 

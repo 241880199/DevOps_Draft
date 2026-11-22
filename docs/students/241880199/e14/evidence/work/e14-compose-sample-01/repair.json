@@ -1,0 +1,25 @@
+{
+  "name": "repair",
+  "commit": "0046952855503bcaf639cfafcc850644bfdcd9ec",
+  "job_id": "job-53e62b1c1bd64ed9939e2cad9d96241f",
+  "trace_id": "trace-5a0dccf751944638ad2d10d088363fff",
+  "status": "SUCCEEDED",
+  "data": {
+    "status": "SUCCEEDED",
+    "patch": "/course/work/e14-compose-sample-01/repair-work/candidate.patch",
+    "sha256": "88074f66c291dcad1344c48f6a2b9ddd42d235d9d0415c85fb33310c5b7cb2af",
+    "validation": {
+      "accepted": true,
+      "checks": {
+        "patch_applies": true,
+        "build": true,
+        "test": true,
+        "header_change": true,
+        "no_missing": true
+      },
+      "error": null,
+      "source_unchanged": false,
+      "rollback": false
+    }
+  }
+}

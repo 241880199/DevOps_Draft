@@ -1,0 +1,5 @@
+{
+  "role": "draft",
+  "http": 422,
+  "error": "{\"status\": \"FAILED\", \"role\": \"draft\", \"error_code\": \"TIMEOUT\", \"error\": \"DRAFT_TIMED_OUT: Docker client command exceeded 0.01s\"}\n"
+}

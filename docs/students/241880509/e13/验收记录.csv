@@ -12,7 +12,7 @@ H1,B,E13,jsmn,PASS,evidence/h1_jsmn/,SUCCEEDED；MD helper.o←extra.h；accepte
 H2,B,E13,inih,PASS,evidence/h2_inih/,SUCCEEDED；MD main.o←extra.h；保留 RD unused.h
 H3,B,E13,tiny-AES-c,PASS,evidence/h3_tiny_aes/,SUCCEEDED；MD helper.o←extra.h；accepted=true
 CI-PRE,B,E13,四容器本地预检,PASS,evidence/ci_four_services/,四服务 healthy；五阶段 SUCCEEDED；162 产物；日志 0 命中
-CI,B,E13,远端必需检查（f552424）,PASS,https://github.com/241880199/DevOps_Draft/actions/runs/45018886493,contracts/e7/e8e10/e11e12/four-services 全 success；新证据提交后需重跑
+CI,B,E13,远端必需检查（081924d）,PASS,https://github.com/241880199/DevOps_Draft/actions/runs/45022754030,contracts/e7/e8e10/e11e12/four-services 全 success；f552424 的检查也已全绿
 SIGN,B,E13,A 组员签收,PENDING,,C1/C1′ 由 B 用 A 代码隔离复现，需 A 确认
-PR,B,提交,PR #13 合并,PENDING,https://github.com/241880199/DevOps_Draft/pull/13,合并后满足 E14 入口
-E14,B,E14,四服务与 RC,PENDING,,E13 门禁合并后开始
+PR,B,提交,PR #14 合并,PASS,https://github.com/241880199/DevOps_Draft/pull/14,合并提交 ecc5d08；081924d 为第一父提交
+E14,B,E14,四服务与 RC,PASS（候选待发布）,docs/students/241880199/e14/,2026-11-22 完成四服务 E2E、故障注入和候选发布材料；A 组 E14 材料待提供

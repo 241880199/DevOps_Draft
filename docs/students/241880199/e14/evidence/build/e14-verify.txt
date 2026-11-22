@@ -1,0 +1,10 @@
+E14 archived-evidence verification (source-tree copies excluded from archive)
+e14-sample-01 PASS job=job-63e15bc5189042c8bdd738a4f6d6b978 trace=trace-d55519162cc4452f992197ddd99d7065 target=0046952855503bcaf639cfafcc850644bfdcd9ec artifacts=156 provenance=None
+e14-real-01 PASS job=job-4d73635d0e7a4a6caf57603b1d7a0d70 trace=trace-08ea91e5cfdb4333864a5e79eaab9e08 target=77b40fd134d6e237e78ba0327d2c7605787c3981 artifacts=155 provenance={'source_job_id': 'job-e6ed45e4cbc84fbdb4a4d6254b2eaadd', 'source_trace_id': 'trace-43c75bf7533a40e99641aa5953d78b48', 'source_kind': 'incremental-check', 'source_sha256': '3f66b60d848845836086884412abb38efb4046bbb70df97f70cb7ed4c9a14fb3'}
+e14-a-01 PASS job=job-785fb612165f4bab94b240bd3c50dcc4 trace=trace-66285cdc478a4bf19c465f7b4c57111d target=93ef2b34b5645ac3578a7b3d34792d80441b4ac6 artifacts=157 provenance={'source_job_id': 'job-84674fd1a52f46b9b34f609bb576c47a', 'source_trace_id': 'trace-e215e2037ce14d05912d6287e5de7446', 'source_kind': 'incremental-check', 'source_sha256': 'c574b1d5e1e921ed01d01af3f2d039922b1ac5de307de56e0b63d5948fc44d2c'}
+e14-compose-sample-01 PASS job=job-53e62b1c1bd64ed9939e2cad9d96241f trace=trace-5a0dccf751944638ad2d10d088363fff target=0046952855503bcaf639cfafcc850644bfdcd9ec artifacts_total=162 archived_checked=138 source_tree_excluded=24
+e14-compose-real-01 PASS job=job-6bfaf72120874bd0b821510923f4a182 trace=trace-96fdb0896b67417f81587b4975c44f03 target=77b40fd134d6e237e78ba0327d2c7605787c3981 artifacts_total=160 archived_checked=137 source_tree_excluded=23
+e14-compose-a-01 PASS job=job-aa83d9a7866947eabcadea9790d0ca20 trace=trace-b9ec5e336d3145edba5fb2a96f98d9b9 target=93ef2b34b5645ac3578a7b3d34792d80441b4ac6 artifacts_total=162 archived_checked=138 source_tree_excluded=24
+e14-fault-retry-01 PASS job=job-17961b8a04c844268ad3c4b53803e586 trace=trace-ae9a8fade4de40a2ab448d19ff2b74e8 target=0046952855503bcaf639cfafcc850644bfdcd9ec artifacts_total=162 archived_checked=138 source_tree_excluded=24
+e14-fault-timeout-01 PASS job=job-df5fdb54ad4a42078c7f03c8f2606a93 trace=trace-f3931ea57b50433597338e1d4c7e90e5 status=FAILED error=TIMEOUT draft_http=422 stages=0
+E14_VERIFY=PASS

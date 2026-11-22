@@ -1,0 +1,11 @@
+{
+  "mode": "e12",
+  "repo": "/course/data/e14-a-project",
+  "base": "e31c977a064cd593a34488e8b9ee0d1a57061fed",
+  "target": "93ef2b34b5645ac3578a7b3d34792d80441b4ac6",
+  "candidate": "/course/data/integration-sample/candidate.Dockerfile",
+  "incremental_report": "/course/data/e14-a-source-a/incremental-check.json",
+  "incremental_report_sha256": "c574b1d5e1e921ed01d01af3f2d039922b1ac5de307de56e0b63d5948fc44d2c",
+  "expected_output": "1",
+  "build_timeout": 600
+}

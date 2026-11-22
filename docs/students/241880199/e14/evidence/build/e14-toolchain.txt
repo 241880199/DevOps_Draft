@@ -1,0 +1,18 @@
+host: Linux 5.15.0-191-generic x86_64
+docker: Docker version 29.1.3, build 29.1.3-0ubuntu3~22.04.2
+compose: 2.40.3+ds1-0ubuntu1~22.04.1
+image: sha256:f0419fb5c1150957284792e1fd8494ed8e57d830a7a530111cb6aed5504b0640
+git: 081924dc9acd1560755334b87ffdd4ac05dde64d
+
+gcc=4:14.2.0-1
+git=1:2.47.3-0+deb13u1
+libc6-dev=2.41-12+deb13u4
+make=4.4.1-2
+strace=6.13+ds-1
+python3=3.13.14
+arch=amd64
+pip:iniconfig==2.3.0
+pip:packaging==26.3
+pip:pluggy==1.6.0
+pip:Pygments==2.21.0
+pip:pytest==8.4.2

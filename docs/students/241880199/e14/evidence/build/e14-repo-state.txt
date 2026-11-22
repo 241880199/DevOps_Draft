@@ -1,0 +1,6 @@
+# repo state
+origin	https://github.com/241880199/DevOps_Draft.git (fetch)
+origin	https://github.com/241880199/DevOps_Draft.git (push)
+?? build/
+081924dc9acd1560755334b87ffdd4ac05dde64d
+# tags

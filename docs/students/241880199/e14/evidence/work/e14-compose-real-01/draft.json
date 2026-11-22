@@ -1,0 +1,85 @@
+{
+  "name": "draft",
+  "commit": "77b40fd134d6e237e78ba0327d2c7605787c3981",
+  "job_id": "job-6bfaf72120874bd0b821510923f4a182",
+  "trace_id": "trace-96fdb0896b67417f81587b4975c44f03",
+  "status": "SUCCEEDED",
+  "data": {
+    "status": "SUCCEEDED",
+    "result": {
+      "status": "SUCCEEDED",
+      "detector": "DRAFT_TEACHING_REPLAY",
+      "trace_id": "e6-b-3db4890340b340cfb198de514baa58cb",
+      "candidate_source": "Manual model response replay; no model/API call in this command",
+      "candidate_sha256": "a55e0c3354cb8512fab402dbf09db50eb8df4a06e1a2fd7bc6b278dcabf11dfc",
+      "attempts": [
+        {
+          "iteration": 1,
+          "tag": "e6-draft-replay:3db4890340b340cfb198de514baa58cb-1",
+          "command": [
+            "docker",
+            "build",
+            "--progress=plain",
+            "-f",
+            "/course/work/e14-compose-real-01/draft-build/iter-01/Dockerfile",
+            "-t",
+            "e6-draft-replay:3db4890340b340cfb198de514baa58cb-1",
+            "/course/work/e14-compose-real-01/draft-build/project"
+          ],
+          "build_exit_code": 1,
+          "failure_class": "MISSING_MAKE"
+        },
+        {
+          "iteration": 2,
+          "tag": "e6-draft-replay:3db4890340b340cfb198de514baa58cb-2",
+          "command": [
+            "docker",
+            "build",
+            "--progress=plain",
+            "-f",
+            "/course/work/e14-compose-real-01/draft-build/iter-02/Dockerfile",
+            "-t",
+            "e6-draft-replay:3db4890340b340cfb198de514baa58cb-2",
+            "/course/work/e14-compose-real-01/draft-build/project"
+          ],
+          "build_exit_code": 0,
+          "image_id": "sha256:6f370587eda50962380588a4364e39ab1de03e10c0ff5caf25d5c379d6d797e9"
+        }
+      ],
+      "input_sha256": {
+        ".gitignore": "d7bfd39146ded6c9700eb81300e82345464db46cda1e775b8a114a811311bafe",
+        "Dockerfile.broken": "4f1fa7c08569a860ec7d12a8dfe2a8069e23416524be4dc02c87a364a901e0b9",
+        "Makefile": "9206301c23ce4cb93c3fc1434037e475cf69f53e132dc541f6028d05e30258b2",
+        "config.h": "ac32a92f4af359517c993d6e8583ea2d9b053c2ad171b4c602bc242894bd9696",
+        "extra.h": "5e20ae92639ee989af5638bd0308a6a86e71bdb4345f60b962ba9db7265e4f7c",
+        "helper.c": "90a60f959d215b0b91807c6dd2c94acf6684a9fe26629dc1591e9b2ea773d78c",
+        "main.c": "1e2e75d84a5a28f44438792dbb33ce888a09fad6597094d998ebaf34fa784312",
+        "unused.h": "4160a4a9d2d6b7b678b4037fefbeb039fe729de87dd2794f6dfcdfc7b8b44c35"
+      },
+      "verification": {
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "--network",
+          "none",
+          "--cpus",
+          "1",
+          "--memory",
+          "128m",
+          "--pids-limit",
+          "64",
+          "--cidfile",
+          "/course/work/e14-compose-real-01/draft-build/verify-container-id.txt",
+          "sha256:6f370587eda50962380588a4364e39ab1de03e10c0ff5caf25d5c379d6d797e9"
+        ],
+        "exit_code": 0,
+        "expected_output": "1",
+        "actual_output": "1\n",
+        "output_matches": true
+      },
+      "elapsed_ms": 848
+    },
+    "artifact": "/course/work/e14-compose-real-01/draft-build/result.json"
+  }
+}
