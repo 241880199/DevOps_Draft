@@ -1,0 +1,16 @@
+{
+  "health": "ok",
+  "job_id": "job-60618aaf34f148f08d5ea1a4f210b8be",
+  "submit_status": 202,
+  "trace_id": "trace-d9d719ddef0d4940af7b5f162d329df0",
+  "same_key_same_job": true,
+  "conflict_status": 409,
+  "outside_data_status": 400,
+  "final_status": "SUCCEEDED",
+  "artifact_count": 95,
+  "download_status": 200,
+  "download_header_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+  "download_body_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+  "listed_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+  "hash_matches": true
+}

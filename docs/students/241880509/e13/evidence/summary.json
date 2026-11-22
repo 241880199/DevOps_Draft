@@ -1,0 +1,162 @@
+{
+  "track": "B",
+  "stage": "E13",
+  "environment": {
+    "image": "course-e11e12:241880509",
+    "image_id": "sha256:91c3d7dee370ed2ffaae45006e30e6f138d5249d694737bd631fee9f2d158376"
+  },
+  "baseline": {
+    "status": "SUCCEEDED",
+    "job_id": "job-d3d68e73cf78485081871ffe862c8676"
+  },
+  "c1": {
+    "status": "SUCCEEDED",
+    "job_id": "job-63ade57488cb4c8aa183c7288226746a",
+    "trace_id": "trace-98cf29069d0e40c6894debcbba9471a1",
+    "base_commit": "add734a17749506ad841c9d58c05e787111464ae",
+    "target_commit": "77b40fd134d6e237e78ba0327d2c7605787c3981",
+    "stages": [
+      "draft",
+      "fixed-md",
+      "repair",
+      "recheck"
+    ],
+    "source_report": {
+      "job_id": "job-96b0363cee494ae882b706e3afccd337",
+      "trace_id": "trace-dee227fe6e8b4cd78a965b44392bfe93",
+      "uri": "artifact://job-96b0363cee494ae882b706e3afccd337/incremental-check.json",
+      "sha256": "ee2612e4d8c08c38b6b3f2b82bb0d97b92c97db7b0443da0fe9bf448c01d448c"
+    },
+    "fixed_report_sha256": "b2c94578b42c5efe54a3bf9bee7783a4a315acb032181440880cd9def896904f",
+    "validation": {
+      "accepted": true,
+      "checks": {
+        "patch_applies": true,
+        "build": true,
+        "test": true,
+        "header_change": true,
+        "no_missing": true
+      },
+      "error": null,
+      "source_unchanged": false,
+      "rollback": false
+    },
+    "recheck": [
+      {
+        "type": "REDUNDANT",
+        "target": "main.o",
+        "dependency": "unused.h",
+        "evidence": [
+          {
+            "source": "make_database",
+            "artifact": "make-db.txt",
+            "line": 1052,
+            "declaration": "main.o: main.c unused.h config.h extra.h"
+          }
+        ],
+        "scope": "Not observed in this recipe job under this build configuration"
+      }
+    ]
+  },
+  "c2": {
+    "status": "FAILED",
+    "error": {
+      "code": "STALE_REPORT",
+      "message": "Report belongs to another commit"
+    },
+    "job_id": "job-119b8bf4823b497fb4cb5692a09f1c7d",
+    "trace_id": "trace-8fafd58ff9164d198422b354b1478e35",
+    "stages": [
+      "draft"
+    ],
+    "handoff_error": "A task belongs to another target commit"
+  },
+  "c3": {
+    "status": "FAILED",
+    "error": {
+      "code": "ARTIFACT_HASH_MISMATCH",
+      "message": "Artifact content changed during transfer"
+    },
+    "job_id": "job-23dddc8d20dd42469405ad65299b592c",
+    "trace_id": "trace-a6114960c5fd43a8b6aa953dbeb753a4",
+    "stages": [
+      "draft"
+    ]
+  },
+  "c4": {
+    "status": "FAILED",
+    "error": {
+      "code": "DRAFT_FAILED",
+      "message": "Docker client command exceeded 0.01s"
+    },
+    "job_id": "job-6e0cb8a3d2b14ccbbeef3213e28f277b",
+    "trace_id": "trace-7530ae8e7ef74ebe855ca4f8e0c8aa0a",
+    "draft_status": "TIMED_OUT",
+    "draft_error": "Docker client command exceeded 0.01s"
+  },
+  "c7": {
+    "failed_status": "FAILED",
+    "failed_error": {
+      "code": "COMMAND_FAILED",
+      "message": "git failed; see base-project-resolve.log"
+    },
+    "failed_job_id": "job-26860188b85a4e5eac4b7510dec7e4bb",
+    "failed_trace_id": "trace-d574d871f9e041ceb12700b2982d3d86",
+    "good_job_id": "job-63ade57488cb4c8aa183c7288226746a",
+    "good_trace_id": "trace-98cf29069d0e40c6894debcbba9471a1",
+    "isolation": "PASS"
+  },
+  "c8": {
+    "health": "ok",
+    "job_id": "job-60618aaf34f148f08d5ea1a4f210b8be",
+    "submit_status": 202,
+    "trace_id": "trace-d9d719ddef0d4940af7b5f162d329df0",
+    "same_key_same_job": true,
+    "conflict_status": 409,
+    "outside_data_status": 400,
+    "final_status": "SUCCEEDED",
+    "artifact_count": 95,
+    "download_status": 200,
+    "download_header_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+    "download_body_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+    "listed_sha256": "0aedd844e45d87669ff3c7ad42fcb15414453a14882df2fa6335997367390c37",
+    "hash_matches": true
+  },
+  "h1": {
+    "status": "SUCCEEDED",
+    "job_id": "job-26db9f3321d04c1f9283a47e1d737d1b",
+    "trace_id": "trace-0b1a640400ce456a91dbbc9130b467c4",
+    "target_commit": "948a1d30cd758d32d45a50f788e5a95fb1d89c69"
+  },
+  "h2": {
+    "status": "SUCCEEDED",
+    "job_id": "job-99c28795d3f74b6b839848ea7c1d1dfc",
+    "trace_id": "trace-a1b5bcf1015348328d1bb7bd95bea99e",
+    "target_commit": "3aadb81763c79651e4dfa99b725ba921ee2b8a39"
+  },
+  "h3": {
+    "status": "SUCCEEDED",
+    "job_id": "job-bd3cfea601404351887229e8315a323e",
+    "trace_id": "trace-e81e0e462a6848428d02e3b5207e7ff8",
+    "target_commit": "5640bb69a01e64559207e9f74d15a9ae71a4d0f3"
+  },
+  "tests": {
+    "e11e12": 21,
+    "e13e14": 7
+  },
+  "four_services_precheck": {
+    "status": "SUCCEEDED",
+    "job_id": "job-2cefa6521a1849aa9cfe51b7ea680382",
+    "trace_id": "trace-4418e843b72342de9487643fbc80911f",
+    "stages": [
+      "draft",
+      "full-check",
+      "incremental-check",
+      "repair",
+      "recheck"
+    ],
+    "artifact_count": 162,
+    "scan": "text_files=152 hits=0 errors=0",
+    "note": "local CI precheck only; remote Actions pending"
+  }
+}
