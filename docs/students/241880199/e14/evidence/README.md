@@ -39,6 +39,7 @@
 - `compose-services.log`：四角色日志（`role/job_id/trace_id/status/elapsed_ms`，失败含 `error_code`）。
 - `compose-sample-console.log`、`compose-real-console.log`、`compose-a-console.log`、`compose-fault-console.log`、`compose-fault-retry-console.log`：四服务五次运行的控制台。
 - `compose-scan.txt`：`runtime log scan: text_files=640 hits=0 errors=0`。
+- `e14-verify.txt`：对归档证据重新执行五阶段、job/trace、报告 SHA、补丁接受、recheck 无 MISSING 和产物哈希校验，末行 `E14_VERIFY=PASS`。源树副本按归档规则排除，脚本只校验实际归档文件并记录排除数量。
 - `fault-container-check.txt`：故障后的容器、镜像和 DRAFT 进程检查。
 - `e14-repo-state.txt`：`origin`、`git status`、`HEAD` 和 `v0.9-rc` 标签查询（本地/远端均为空）。该文件是运行时的快照；之后 E13 已通过 PR #14 合并到 `main`（`ecc5d08`），发布标签以最终 Release 为准。
 
