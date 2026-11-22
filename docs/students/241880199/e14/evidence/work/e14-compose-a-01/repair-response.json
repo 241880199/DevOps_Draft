@@ -1,0 +1,18 @@
+{
+  "status": "SUCCEEDED",
+  "patch": "/course/work/e14-compose-a-01/repair-work/candidate.patch",
+  "sha256": "91b08189430c896de17a2e530447d1fa493edc5d8f4aca33a3d27f2d8de2eded",
+  "validation": {
+    "accepted": true,
+    "checks": {
+      "patch_applies": true,
+      "build": true,
+      "test": true,
+      "header_change": true,
+      "no_missing": true
+    },
+    "error": null,
+    "source_unchanged": false,
+    "rollback": false
+  }
+}

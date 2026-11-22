@@ -1,0 +1,29 @@
+{
+  "name": "incremental-check",
+  "commit": "0046952855503bcaf639cfafcc850644bfdcd9ec",
+  "job_id": "job-53e62b1c1bd64ed9939e2cad9d96241f",
+  "trace_id": "trace-5a0dccf751944638ad2d10d088363fff",
+  "status": "SUCCEEDED",
+  "data": {
+    "status": "SUCCEEDED",
+    "report": "/course/work/e14-compose-sample-01/incremental/incremental-check.json",
+    "sha256": "e93dc9cac164b155155746900340a55ebd7635cac2d5558f81b5ba9922d6a669",
+    "findings": [
+      {
+        "type": "MISSING",
+        "target": "main.o",
+        "dependency": "config.h"
+      },
+      {
+        "type": "MISSING",
+        "target": "main.o",
+        "dependency": "extra.h"
+      },
+      {
+        "type": "REDUNDANT",
+        "target": "main.o",
+        "dependency": "unused.h"
+      }
+    ]
+  }
+}

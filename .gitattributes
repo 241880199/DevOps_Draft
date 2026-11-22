@@ -1,2 +1,5 @@
 # E6 证据包含按字节计算的 SHA-256，禁止 Git 做换行转换。
 work/e6-own/** -text
+
+# E14 运行证据按字节计算 SHA-256，禁止 Git 做换行转换。
+docs/students/241880199/e14/evidence/** -text

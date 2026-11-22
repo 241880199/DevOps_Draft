@@ -1,0 +1,11 @@
+{
+  "mode": "e12",
+  "repo": "/course/data/e14-real-project",
+  "base": "add734a17749506ad841c9d58c05e787111464ae",
+  "target": "77b40fd134d6e237e78ba0327d2c7605787c3981",
+  "candidate": "/course/data/e14-real-candidate.Dockerfile",
+  "incremental_report": "/course/data/e14-a-output/incremental-check.json",
+  "incremental_report_sha256": "3f66b60d848845836086884412abb38efb4046bbb70df97f70cb7ed4c9a14fb3",
+  "expected_output": "1",
+  "build_timeout": 600
+}
